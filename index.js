@@ -246,7 +246,6 @@ if(cmd === `${prefix}serverinfo`) {
         .addField("Csatornák:", message.guild.channels.size, true)
         .addField("Rangok száma:", message.guild.roles.size, true)
         .addField("Szerver létrehozása:", `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
-        .addField(`Rangok:`, guild.roles.map(roles => `${roles}`).join(' '), true)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`${name}`);
     message.channel.send({embed});
