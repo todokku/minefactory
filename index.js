@@ -656,4 +656,4 @@ if(message.member.roles.has(warnolt.id)) {
    
 })
  
-bot.login(tokenfile.token);
+bot.login(process.env.BOT_TOKEN);
