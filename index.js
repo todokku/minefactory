@@ -682,7 +682,7 @@ if(cmd === `${prefix}matek`) {
 
             let kvizEmbed = new Discord.RichEmbed()
             .setTitle(`${message.author.username}`)
-            .addField("Sikeresen teljesítetted a kvízt ezért kaptál egy kis jutalmat!", `A számládhoz került +250${emoji.emerald}`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy! <3`)
             .setColor("#1CEF5B")
             .setTimestamp(message.createdAt)
             .setFooter(`${name}`)
@@ -691,12 +691,6 @@ if(cmd === `${prefix}matek`) {
             
             message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
 
-            money[message.author.id] = {
-                money: selfMoney + 250
-            }
-            kviz[message.author.id] = {
-                kviz: selfkviz + 1
-            }
         } else if(selfMoney > kkk ) {
             message.reply(`Hibás válsz. A megoldás ez volt: ${respondArray[num]}.`);
 
