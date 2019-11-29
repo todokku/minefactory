@@ -637,6 +637,7 @@ if(cmd === `${prefix}matek`) {
         message.delete();
         return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
     }
+        cooldown.add(message.author.id);
 
 
     setTimeout(() => {
