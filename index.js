@@ -11,6 +11,7 @@ const superagent = require("superagent");
 let cooldown = new Set();
 let sdseconds = 15;
 
+
 ////////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
@@ -682,7 +683,7 @@ if(cmd === `${prefix}matek`) {
 
             let kvizEmbed = new Discord.RichEmbed()
             .setTitle(`${message.author.username}`)
-            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy! <3`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy!`)
             .setColor("#1CEF5B")
             .setTimestamp(message.createdAt)
             .setFooter(`${name}`)
@@ -691,24 +692,13 @@ if(cmd === `${prefix}matek`) {
             
             message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
 
-        } else if(selfMoney > kkk ) {
-            message.reply(`Hibás válsz. A megoldás ez volt: ${respondArray[num]}.`);
-
-
-        } else {
-            message.reply(`Hibás válasz! A megoldás ez volt: ${respondArray[num]}.`);
-        }
+        } else message.reply(`Hibás válsz. A megoldás ez volt: ${respondArray[num]}.`);
             
             
 
     }).catch(err => {
-        if(selfMoney > kkk ) {
-            message.reply(`Lejárt az időd. A megoldás ez volt: ${respondArray[num]}.`);
 
-
-        } else {
             message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
-        }
 
     });
 }
