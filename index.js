@@ -8,6 +8,8 @@ const moment = require("moment");
 // const cooldown = require("./cooldown.json");
 let name = "© Minefactory ©";
 const superagent = require("superagent");
+let cooldown = new Set();
+let sdseconds = 15;
 
 ////////////////////////////////////////////////
 
@@ -246,6 +248,7 @@ if(cmd === `${prefix}serverinfo`) {
         .addField("Csatornák:", message.guild.channels.size, true)
         .addField("Rangok száma:", message.guild.roles.size, true)
         .addField("Szerver létrehozása:", `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
+        .addField(`Rangok:`, guild.roles.map(roles => `${roles}`).join(' '), true)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`${name}`);
     message.channel.send({embed});
@@ -292,6 +295,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}matek`, "Matematikai rejtvény a profiknak!")
     .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
     .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
     .addField(`${prefix}ranglétrehoz <új rang>`, "Létrehoz egy új rangot. **Moderator**")
@@ -610,7 +614,7 @@ if (cmd === `${prefix}warn`) {
                     message.channel.send("Ez az ember kickelve lett! Ha nem akkor kérlek add meg nekem az 'ADMINISTRATOR' jogot.");
                     message.guild.member(wr.id).kick();
                 }
-    } else message.channel.send("A szerver adminjait nem tudod némítani!");
+    } else message.channel.send("A szerver adminjait nem tudod warnolni!");
     } else message.channel.send("Kérlek írj be egy nevet. (pl: @asd)");
     } else message.reply("Nincs jogod hogy warnolj!");
 } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
@@ -625,6 +629,94 @@ if(message.member.roles.has(warnolt.id)) {
     message.member.kick();
     }
 }
+}
+
+if(cmd === `${prefix}matek`) {
+    if(cooldown.has(message.author.id)) {
+        message.delete();
+        return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
+    }
+    if (!message.member.hasPermission("ADMINISTRATOR")) {
+        cooldown.add(message.author.id);
+    }
+
+
+    setTimeout(() => {
+        cooldown.delete(message.author.id)
+    }, sdseconds * 1000)
+  
+
+
+
+    let kkk = 60;
+    let egy = Math.floor(Math.random() *1200);
+    let keto = Math.floor(Math.random() *2200);
+    let harom = Math.floor(Math.random() *300);
+    let negy = Math.floor(Math.random() *300)*2;
+    let ot = 2;
+    let hat = Math.floor(Math.random() *9999999)*2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let askArray = [`Mennyi? ${egy} + ${keto}`, `Mennyi? ${egy} + ${keto} - ${harom}`, `Mennyi? ${negy}:${ot}`, `Mennyi? ${hat}:${ot}`];
+
+    let respondArray = [`${egy + keto}`, `${egy + keto - harom}`, `${negy / ot}`, `${hat / ot}`];
+
+    let num = Math.floor(Math.random() *askArray.length);
+
+    let  qEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .setThumbnail(uIcon)
+    .addField("Matematikai kvíz! Válaszolj a kérdésre 35mp belül!", askArray[num])
+    .addBlankField()
+    .setFooter(`${name}`)
+    .setTimestamp(message.createdAt);
+
+    const filter = m => m.author.id === message.author.id;
+    message.channel.send(qEmbed);
+    message.channel.awaitMessages(filter, {max: 1, time:35000}).then(collected => {
+
+        if(collected.first().content === "Nemtudom") return message.reply(`A megoldás ez volt: ${respondArray[num]}`);
+        let response = collected.first().content;
+
+        if(response === respondArray[num]) {
+
+            let kvizEmbed = new Discord.RichEmbed()
+            .setTitle(`${message.author.username}`)
+            .addField("Sikeresen teljesítetted a kvízt ezért kaptál egy kis jutalmat!", `A számládhoz került +250${emoji.emerald}`)
+            .setColor("#1CEF5B")
+            .setTimestamp(message.createdAt)
+            .setFooter(`${name}`)
+
+            message.channel.send(kvizEmbed)
+            
+            message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
+
+            money[message.author.id] = {
+                money: selfMoney + 250
+            }
+            kviz[message.author.id] = {
+                kviz: selfkviz + 1
+            }
+        } else if(selfMoney > kkk ) {
+            message.reply(`Hibás válsz. A megoldás ez volt: ${respondArray[num]}.`);
+
+
+        } else {
+            message.reply(`Hibás válasz! A megoldás ez volt: ${respondArray[num]}.`);
+        }
+            
+            
+
+    }).catch(err => {
+        if(selfMoney > kkk ) {
+            message.reply(`Lejárt az időd. A megoldás ez volt: ${respondArray[num]}.`);
+
+
+        } else {
+            message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
+        }
+
+    });
 }
  
 //xd
@@ -653,5 +745,6 @@ if(message.member.roles.has(warnolt.id)) {
 
    
 })
+ 
  
 bot.login(process.env.BOT_TOKEN);
