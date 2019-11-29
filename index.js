@@ -637,9 +637,6 @@ if(cmd === `${prefix}matek`) {
         message.delete();
         return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
     }
-    if (!message.member.hasPermission("ADMINISTRATOR")) {
-        cooldown.add(message.author.id);
-    }
 
 
     setTimeout(() => {
@@ -692,7 +689,7 @@ if(cmd === `${prefix}matek`) {
             
             message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
 
-        } else message.reply(`Hibás válsz. A megoldás ez volt: ${respondArray[num]}.`);
+        } else message.reply(`Hibás válasz. A megoldás ez volt: ${respondArray[num]}.`);
             
             
 
