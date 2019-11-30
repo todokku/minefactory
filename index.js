@@ -10,6 +10,7 @@ let name = "© Minefactory ©";
 const superagent = require("superagent");
 let cooldown = new Set();
 let sdseconds = 15;
+const randomPuppy = require("random-puppy");
 
 
 ////////////////////////////////////////////////
@@ -699,6 +700,21 @@ if(cmd === `${prefix}matek`) {
             message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
 
     });
+}
+ 
+ if(cmd === `${prefix}meme`) {
+
+const subReddits = ["dankmeme", "meme", "me_irl"];
+        const random = subReddits[Math.floor(Math.random() * subReddits.length)];
+
+        const img = await randomPuppy(random);
+        const embed = new Discord.RichEmbed()
+            .setColor("RANDOM")
+            .setImage(img)
+            .setTitle(`From /r/${random}`)
+            .setURL(`https://reddit.com/r/${random}`);
+
+        message.channel.send(embed);
 }
  
 //xd
