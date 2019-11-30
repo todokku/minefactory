@@ -702,7 +702,7 @@ if(cmd === `${prefix}matek`) {
 }
  
 //xd
- if(cmd === `${prefix}i`) {
+if(cmd === `${prefix}i`) {
 if(!args[0]) return message.reply('A semmire nem tudok válaszolni!');
 
 for(let i = 0; i <= messageArray.length; i++) 
@@ -762,7 +762,55 @@ for(let i = 0; i <= messageArray.length; i++)
     } else if(messageArray[i] === "ember") {
      break;
     }
-}
+} else if(messageArray[i] === "fidesz" || messageArray[i] === "dk")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "fidesz") {
+        message.reply("A fidesz az szar!");
+        break;
+    } else if(messageArray[i] === "dk") {
+     message.reply("Feri a kedvenc youtuberem. Ezt nem tudtad igaz?");
+     break;
+    } else if(messageArray[i] === "dk") {
+     break;
+    }
+} else if(messageArray[i] === "vagyok" || messageArray[i] === "vagy")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "vagyok") {
+        message.reply("Igen.");
+        break;
+    } else if(messageArray[i] === "vagy") {
+     message.reply("Lehetséges.");
+     break;
+    } else if(messageArray[i] === "vagy") {
+     break;
+    } 
+} else if(messageArray[i] === "kuss" || messageArray[i] === "thx")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "kuss") {
+        message.reply("Nem fogok kussolni :D");
+        break;
+    } else if(messageArray[i] === "thx") {
+     message.reply("Nincs mit!");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "hívnak" || messageArray[i] === "nap van")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "hívnak") {
+        message.reply("Minefactory. Ez nem egyértelmű?");
+        break;
+    } else if(messageArray[i] === "nap van") {
+     message.reply("Pffu. Hát nem tudom.");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} 
 
 
 
