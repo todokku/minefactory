@@ -702,6 +702,76 @@ if(cmd === `${prefix}matek`) {
 }
  
 //xd
+ if(cmd === `${prefix}i`) {
+if(!args[0]) return message.reply('A semmire nem tudok válaszolni!');
+
+for(let i = 0; i <= messageArray.length; i++) 
+   {
+       if(messageArray[i] === "nem" || messageArray[i] === "NEM") {
+       {
+        for(let i = 0; i <= messageArray.length; i++) 
+           if(messageArray[i] === "akarok") {
+               message.reply("És ha még is akarod?");
+               break;
+           } else if(messageArray[i] === "vagyok") {
+            message.reply("De igen! Az vagy!");
+            break;
+           } else if(messageArray[i] === "nem") {
+            message.reply("Mi az hogy nem?");
+            break;
+           }
+       }
+    } else if(messageArray[i] === "igen" || messageArray[i] === "IGEN") {
+    {
+     for(let i = 0; i <= messageArray.length; i++) 
+        if(messageArray[i] === "akarok") {
+            message.reply("Biztos?");
+            break;
+        } else if(messageArray[i] === "vagyok") {
+         message.reply("Ok?");
+         break;
+        } else if(messageArray[i] === "igen") {
+         message.reply("Igen?");
+         break;
+        }
+    } 
+} else if(messageArray[i] === "fasz" || messageArray[i] === "geci" || messageArray[i] === "kurva") {
+    message.reply("Szépen beszélni! Nem vagyunk mi állatok! Igaz?");
+    break;
+} if(messageArray[i] === "kormány" || messageArray[i] === "év")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "kormány") {
+        message.reply("A kormány? Hát eléggé gyatra emberekből áll. XD");
+        break;
+    } else if(messageArray[i] === "év") {
+     message.reply("Az biztos hogy szép évnek nézünk eléje!");
+     break;
+    } else if(messageArray[i] === "év") {
+     break;
+    }
+} else if(messageArray[i] === "ember" || messageArray[i] === "nagy")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "ember") {
+        message.reply("Ember ember december... :)");
+        break;
+    } else if(messageArray[i] === "nagy") {
+     message.reply("Én is ismerek nagy dolgokat!");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+}
+
+
+
+       
+
+}
+///vége az intnek
+}
+///vége
  
 // if (cmd === `${prefix}asd`) {
 //     let viprang = message.guild.roles.find(`name`, `redstone`);
