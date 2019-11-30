@@ -798,14 +798,86 @@ for(let i = 0; i <= messageArray.length; i++)
     } else if(messageArray[i] === "ember") {
      break;
     }
-} else if(messageArray[i] === "hívnak" || messageArray[i] === "nap van")
+} else if(messageArray[i] === "hívnak" || messageArray[i] === "nap")
 {
  for(let i = 0; i <= messageArray.length; i++) 
     if(messageArray[i] === "hívnak") {
         message.reply("Minefactory. Ez nem egyértelmű?");
         break;
-    } else if(messageArray[i] === "nap van") {
+    } else if(messageArray[i] === "nap") {
      message.reply("Pffu. Hát nem tudom.");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "fiú" || messageArray[i] === "lány")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "fiú") {
+        message.reply("Erre nem akarok válaszolni.");
+        break;
+    } else if(messageArray[i] === "lány") {
+     message.reply("Szeretem a csajokat.");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "szeretsz" || messageArray[i] === "szeretlek")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "szeretsz") {
+        message.reply("Persze :3");
+        break;
+    } else if(messageArray[i] === "szeretlek") {
+     message.reply("Én is téged :)");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "törvény" || messageArray[i] === "úr")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "törvény") {
+        message.reply("Én nem szeretem a törvényeket.");
+        break;
+    } else if(messageArray[i] === "úr") {
+     message.reply("úr? ");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "új" || messageArray[i] === "szó")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "új") {
+        message.reply("Szerintem nagyszerű.");
+        break;
+    } else if(messageArray[i] === "szó") {
+     message.reply("fogalmam sincs.");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === "kecske" || messageArray[i] === "pornó")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === "kecske") {
+        message.reply("A kecskék jó állatok.");
+        break;
+    } else if(messageArray[i] === "pornó") {
+     message.reply("Szeretem a pornót :D");
+     break;
+    } else if(messageArray[i] === "ember") {
+     break;
+    }
+} else if(messageArray[i] === `${Number}` || messageArray[i] === "tudom")
+{
+ for(let i = 0; i <= messageArray.length; i++) 
+    if(messageArray[i] === `${Number}`) {
+        message.reply("És most ezzel mit kezdjek?");
+        break;
+    } else if(messageArray[i] === "tudom") {
+     message.reply("Tudom hogy tudod azt amit én. :D");
      break;
     } else if(messageArray[i] === "ember") {
      break;
