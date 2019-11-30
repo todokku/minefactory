@@ -297,6 +297,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}meme`, "Random meme")
     .addField(`${prefix}matek`, "Matematikai rejtvény a profiknak!")
     .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
     .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
