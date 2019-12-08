@@ -85,7 +85,7 @@ if(cmd === `${prefix}nyeremény`) {
     message.channel.send(nyer);
 
     await message.channel.send(`**Innentől számítva **${args[1]}** idő van hátra!**`);
-    let asd = message.guild.members.random()
+    let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
     message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
@@ -106,7 +106,7 @@ if(cmd === `${prefix}nyeremény`) {
     message.channel.send(nyer);
 
     await message.channel.send(`**Innentől számítva **${args[1]}** idő van hátra!**`);
-    let asd = message.guild.members.random()
+    let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
     message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
@@ -126,7 +126,7 @@ if(cmd === `${prefix}nyeremény`) {
     message.channel.send(nyer);
 
     await message.channel.send(`**Innentől számítva **${args[1]}** idő van hátra!**`);
-    let asd = message.guild.members.random()
+    let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
     message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
@@ -146,7 +146,7 @@ if(cmd === `${prefix}nyeremény`) {
     message.channel.send(nyer);
 
     await message.channel.send(`**Innentől számítva **${args[1]}** idő van hátra!**`);
-    let asd = message.guild.members.random()
+    let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
     message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
@@ -460,6 +460,7 @@ if (cmd === `${prefix}cigi`) {
         }, 4000);
         setTimeout(() => {
             msg.edit(`${message.author.username} végzett a tüdőt károsító szórakozásával!`);
+            message.channel.send("Ha leakarsz szokni a cigizésről akkor ezt ajánlom: www.leteszemacigit.hu")
         }, 4500);
     });
 };
