@@ -293,6 +293,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
     .addField(`${prefix}matek`, "Matematikai rejtvény a profiknak!")
     .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
     .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
@@ -465,6 +466,52 @@ if (cmd === `${prefix}cigi`) {
     });
 };
 
+ if(cmd === `${prefix}nitrókód`) {
+    let kkk = 60;
+    let egy = Math.floor(Math.random() *1200);
+    let keto = Math.floor(Math.random() *2200);
+    let harom = Math.floor(Math.random() *300);
+    let negy = Math.floor(Math.random() *300)*2;
+    let ot = 2;
+    let hat = Math.floor(Math.random() *9999999)*2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let asd = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let asd2 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let asd3 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let asd4 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+
+    let num = Math.floor(Math.random() *asd.length);
+    let num2 = Math.floor(Math.random() *asd2.length);
+    let num3 = Math.floor(Math.random() *asd3.length);
+    let num4 = Math.floor(Math.random() *asd4.length);    
+
+
+    let szam = [`0`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+    let szam2 = [`0`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+    let szam3 = [`0`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+    let szam4 = [`0`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
+
+    let xd = Math.floor(Math.random() *szam.length);
+    let xd2 = Math.floor(Math.random() *szam2.length);
+    let xd3 = Math.floor(Math.random() *szam3.length);
+    let xd4 = Math.floor(Math.random() *szam4.length);   
+
+
+    let k = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let k2 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let k3 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+    let k4 = [`a`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `n`, `m`, `o`, `ü`, `p`, `q`, `r`, `s`, `t`, `v`, `w`, `x`, `y`, `z`];
+
+
+    let n = Math.floor(Math.random() *k.length);
+    let n2 = Math.floor(Math.random() *k2.length);
+    let n3 = Math.floor(Math.random() *k3.length);
+    let n4 = Math.floor(Math.random() *k4.length);   
+
+
+    message.reply(`Nitró kód: ${asd[num]}${asd2[num2]}${asd3[num3]}${asd4[num4]}-${szam[xd]}${szam2[xd2]}${szam3[xd3]}${szam4[xd4]}-${k[n]}${k2[n2]}${k3[n3]}${k4[n4]}`)
+    
+}
 
 let cdrole = message.guild.roles.find(`name`, `muted`);
 if(!cdrole) {
