@@ -509,7 +509,7 @@ if (cmd === `${prefix}cigi`) {
     let n4 = Math.floor(Math.random() *k4.length);   
 
 
-    message.reply(`Nitró kód: ${asd[num]}${asd2[num2]}${asd3[num3]}${asd4[num4]}-${szam[xd]}${szam2[xd2]}${szam3[xd3]}${szam4[xd4]}-${k[n]}${k2[n2]}${k3[n3]}${k4[n4]}`)
+    message.reply(`Nitró kód: https://discordapp.com/gifts/${asd[num]}${asd2[num2]}${asd3[num3]}${asd4[num4]}-${szam[xd]}${szam2[xd2]}${szam3[xd3]}${szam4[xd4]}-${k[n]}${k2[n2]}${k3[n3]}${k4[n4]}`)
     
 }
 
