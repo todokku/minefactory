@@ -153,8 +153,14 @@ if(cmd === `${prefix}nyeremény`) {
     message.channel.send("**A nyeremény játéknak vége!**")
     }, 3600000)
 
-    } else {
-        message.channel.send('Kérlek add meg az időt! (5m, 10m, 30m, 1h)');
+    } else if(args[1] === `gyors`){
+
+    let asd = message.guild.members.filter(member => !member.user.bot).random();
+
+    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+
+    }else {
+        message.channel.send('Kérlek add meg az időt! (gyors, 5m, 10m, 30m, 1h)');
     }
 
 } else message.channel.send('Kérlek add meg a nyeremény játék tárgyát!');
@@ -164,6 +170,7 @@ if(cmd === `${prefix}nyeremény`) {
     
 
 }
+/////////////////////////////////////////////
 
 
 if(cmd === `${prefix}ötlet`){
@@ -466,7 +473,8 @@ if (cmd === `${prefix}cigi`) {
     });
 };
 
- if(cmd === `${prefix}nitrókód`) {
+///////////////////////////////////////////////////////////////////////////////////////
+if(cmd === `${prefix}nitrókód`) {
     let kkk = 60;
     let egy = Math.floor(Math.random() *1200);
     let keto = Math.floor(Math.random() *2200);
@@ -509,7 +517,7 @@ if (cmd === `${prefix}cigi`) {
     let n4 = Math.floor(Math.random() *k4.length);   
 
 
-    message.reply(`Nitró kód: ${asd[num]}${asd2[num2]}${asd3[num3]}${asd4[num4]}-${szam[xd]}${szam2[xd2]}${szam3[xd3]}${szam4[xd4]}-${k[n]}${k2[n2]}${k3[n3]}${k4[n4]} (https://discordapp.com/library/inventory)`)
+    message.reply(`Nitró kód: https://discordapp.com/gifts/${asd[num]}${asd2[num2]}${asd3[num3]}${asd4[num4]}-${szam[xd]}${szam2[xd2]}${szam3[xd3]}${szam4[xd4]}-${k[n]}${k2[n2]}${k3[n3]}${k4[n4]}`)
     
 }
 
