@@ -323,7 +323,7 @@ if (cmd === `${prefix}profilkép`) {
     
 }
 
-if(cmd === `{prefix}meghívó`) {
+if(cmd === `${prefix}meghívó`) {
     let mgEmbed = new Discord.RichEmbed()
     .setColor("#3a74e0")
     .setTitle("Meghívó a bothoz:")
