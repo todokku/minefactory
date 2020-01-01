@@ -295,6 +295,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}ötlet <ötleted>`, "Ha bármi ötleted van, hogy mi legyen a botba ide írd!")
     .addField(`${prefix}szavazás <szavazás>`, "Szavazás indítása.")
     .addField(`${prefix}üzemidő`, "Üzem idő.")
+    .addField(`${prefix}meghívó`, "Ha tetszik a bot itt tudod meghívni.")
     .addField(`${prefix}profilkép <@név>`, "Profilkép lekérése.")
     .addField(`${prefix}cigi`, "Elszívsz egy cigit. (Vigyázz káros!)")
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
@@ -322,7 +323,18 @@ if (cmd === `${prefix}profilkép`) {
     
 }
 
+if(cmd === `meghívó`) {
+    let mgEmbed = new Discord.RichEmbed()
+    .setColor("#3a74e0")
+    .setTitle("Meghívó a bothoz:")
+    .addField("Bot meghívása:", `https://bit.ly/2ZJ0Gys`)
+    .addField("Meghívás a bot support szerverére:", "https://discord.gg/QTWvY4U")
+    .addBlankField()
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
 
+    message.channel.send(mgEmbed);
+}
 
 if(cmd === `${prefix}szavazás`){
     if(!args[0]) return message.channel.send('Kérlek adj meg egy tárgyat!');
@@ -761,7 +773,7 @@ if(cmd === `${prefix}matek`) {
   
 
 ///////////////////////////// ifek
-    if(args[1] === `easy`){
+    if(args[0] === `easy`){
     let kkk = 60;
     let egy = Math.floor(Math.random() *200);
     let keto = Math.floor(Math.random() *400);
@@ -814,7 +826,7 @@ if(cmd === `${prefix}matek`) {
 
     });
     /////easy if vége
-    } else if(args[1] === `normal`) {
+    } else if(args[0] === `normal`) {
         ///normal
         let kkk = 60;
     let egy = Math.floor(Math.random() *1200);
@@ -867,7 +879,7 @@ if(cmd === `${prefix}matek`) {
             message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
 
     });
-    } else if(args[1] === `hard`) {
+    } else if(args[0] === `hard`) {
         let kkk = 60;
     let egy = Math.floor(Math.random() *9000);
     let keto = Math.floor(Math.random() *5000);
