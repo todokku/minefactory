@@ -10,7 +10,8 @@ let name = "© Minefactory ©";
 const superagent = require("superagent");
 let cooldown = new Set();
 let sdseconds = 15;
-
+const weather = require('weather-js');
+// const randomPuppy = require("random-puppy");
 
 ////////////////////////////////////////////////
 
@@ -226,21 +227,21 @@ if(cmd === `${prefix}serverinfo`) {
     };
     let verifLevels = ["Nincs", "Kevés", "Közepes", "Erős", "Nagyon erős"];
     let region = {
-        "brazil": ":flag_br: Brazil",
-        "eu-central": ":flag_eu: Central Europe",
-        "singapore": ":flag_sg: Singapore",
-        "us-central": ":flag_us: U.S. Central",
+        "brazil": ":flag_br: Brazília",
+        "eu-central": ":flag_eu: Közép európa",
+        "singapore": ":flag_sg: Szingapúr",
+        "us-central": ":flag_us: Közép USA",
         "sydney": ":flag_au: Sydney",
-        "us-east": ":flag_us: U.S. East",
-        "us-south": ":flag_us: U.S. South",
-        "us-west": ":flag_us: U.S. West",
-        "europe": ":flag_eu: Western Europe",
-        "vip-us-east": ":flag_us: VIP U.S. East",
+        "us-east": ":flag_us: Kelet USA",
+        "us-south": ":flag_us: Dél USA",
+        "us-west": ":flag_us: Nyugat USA",
+        "europe": ":flag_eu: Nyugat európa",
+        "vip-us-east": ":flag_us: VIP Kelet USA",
         "london": ":flag_gb: London",
         "amsterdam": ":flag_nl: Amsterdam",
         "hongkong": ":flag_hk: Hong Kong",
-        "russia": ":flag_ru: Russia",
-        "southafrica": ":flag_za:  South Africa"
+        "russia": ":flag_ru: Oroszország",
+        "southafrica": ":flag_za:  Dél afrika"
     };
     const embed = new Discord.RichEmbed()
         .setAuthor(message.guild.name)
@@ -657,6 +658,43 @@ if(cmd === `${prefix}macska`) {
 
         message.channel.send(maEmbed);
 }
+
+if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of the message is calling the weather command.
+    // You can find some of the code used here on the weather-js npm page in the description.
+    if(args[0]) {
+
+    weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.
+        if (err) message.channel.send(err);
+
+        // We also want them to know if a place they enter is invalid.
+        if (result.length === 0) {
+            message.reply('Kérlek adj meg egy létező város/falu nevet!') // This tells them in chat that the place they entered is invalid.
+            return; // This exits the code so the rest doesn't run.
+        }
+
+        // Variables
+        var current = result[0].current; // This is a variable for the current part of the JSON output
+        var location = result[0].location; // This is a variable for the location part of the JSON output
+
+        // Let's use an embed for this.
+        const embed = new Discord.RichEmbed()
+            .setDescription(`**${current.skytext}**`) // This is the text of what the sky looks like, remember you can find all of this on the weather-js npm page.
+            .setAuthor(`Időjárás itt: ${current.observationpoint}`) // This shows the current location of the weather.
+            .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed
+            .setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex
+            .addField('Idő zóna',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation
+            .addField('Fokozat típusa',location.degreetype, true)// This is the field that shows the degree type, and is inline
+            .addField('Hőfok',`${current.temperature}°C`, true)
+            .addField('Hőérzet', `${current.feelslike}°C`, true)
+            .addField('Szél',current.winddisplay, true)
+            .addField('Páratartalom', `${current.humidity}%`, true)
+
+            // Now, let's display it when called
+            message.channel.send({embed});
+    });
+} else message.reply("Kérlek adj meg egy város/falu nevet!")
+}
+
 
 let nemitottrang = message.guild.roles.find(`name`, `muted`);
 if(!message.member.hasPermission("KICK_MEMBERS")) {
