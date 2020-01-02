@@ -813,16 +813,6 @@ if(message.member.roles.has(warnolt.id)) {
 
 ////////////////////////////////matek
 if(cmd === `${prefix}matek`) {
-    if(cooldown.has(message.author.id)) {
-        message.delete();
-        return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
-    }
-        cooldown.add(message.author.id);
-
-
-    setTimeout(() => {
-        cooldown.delete(message.author.id)
-    }, sdseconds * 1000)
   
 
 ///////////////////////////// ifek
