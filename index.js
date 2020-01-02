@@ -291,7 +291,7 @@ if (cmd === `${prefix}profilkép`) {
     .setTitle(`${name}`)
     .setColor("#2DE7F7")
     .addBlankField()
-    .addField("Parancsok:", "ˇˇˇ")
+    .addField("Általános Parancsok:", "ˇˇˇ")
     .addBlankField()
     .addField(`${prefix}ötlet <ötleted>`, "Ha bármi ötleted van, hogy mi legyen a botba ide írd!")
     .addField(`${prefix}szavazás <szavazás>`, "Szavazás indítása.")
@@ -305,6 +305,20 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
     .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
     .addField(`${prefix}matek <easy / normal / hard>`, "Matematikai rejtvény a profiknak!")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+ 
+    message.member.send(testembed);
+
+    let thxxd = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("Moderátor parancsok:", "ˇˇˇ")
+    .addBlankField()
     .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
     .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
     .addField(`${prefix}ranglétrehoz <új rang>`, "Létrehoz egy új rangot. **Moderator**")
@@ -319,8 +333,8 @@ if (cmd === `${prefix}profilkép`) {
     .setThumbnail(botThumb)
     .setTimestamp(message.createdAt)
     .setFooter(`${name}`);
- 
-    message.member.send(testembed);
+    message.member.send(thxxd);
+
     message.reply(`privátba elküldtem a parancsokat!`);
     
 }
