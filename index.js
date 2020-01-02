@@ -827,7 +827,6 @@ if(cmd === `${prefix}matek`) {
 
 ///////////////////////////// ifek
     if(args[0] === `easy`){
-    let kkk = 60;
     let egy = Math.floor(Math.random() *200);
     let keto = Math.floor(Math.random() *400);
     let harom = Math.floor(Math.random() *100);
@@ -881,7 +880,6 @@ if(cmd === `${prefix}matek`) {
     /////easy if vége
     } else if(args[0] === `normal`) {
         ///normal
-        let kkk = 60;
     let egy = Math.floor(Math.random() *1200);
     let keto = Math.floor(Math.random() *2200);
     let harom = Math.floor(Math.random() *300);
@@ -933,7 +931,6 @@ if(cmd === `${prefix}matek`) {
 
     });
     } else if(args[0] === `hard`) {
-        let kkk = 60;
     let egy = Math.floor(Math.random() *9000);
     let keto = Math.floor(Math.random() *5000);
     let harom = Math.floor(Math.random() *4000);
@@ -986,7 +983,6 @@ if(cmd === `${prefix}matek`) {
 
     });
     } else {
-        let kkk = 60;
     let egy = Math.floor(Math.random() *1200);
     let keto = Math.floor(Math.random() *2200);
     let harom = Math.floor(Math.random() *300);
