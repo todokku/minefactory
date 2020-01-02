@@ -234,7 +234,7 @@ if(cmd === `${prefix}serverinfo`) {
         "us-east": ":flag_us: U.S. East",
         "us-south": ":flag_us: U.S. South",
         "us-west": ":flag_us: U.S. West",
-        "europa": ":flag_eu: Western Europe",
+        "europe": ":flag_eu: Western Europe",
         "vip-us-east": ":flag_us: VIP U.S. East",
         "london": ":flag_gb: London",
         "amsterdam": ":flag_nl: Amsterdam",
