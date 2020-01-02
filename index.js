@@ -302,6 +302,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
     .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
     .addField(`${prefix}matek <easy / normal / hard>`, "Matematikai rejtvény a profiknak!")
     .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
