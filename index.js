@@ -674,8 +674,49 @@ if(cmd === `${prefix}macska`) {
         message.channel.send(maEmbed);
 }
 
+if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of the message is calling the weather command.
+    // You can find some of the code used here on the weather-js npm page in the description.
+    if(args[0]) {
+
+    weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.
+        if (err) message.channel.send(err);
+
+        // We also want them to know if a place they enter is invalid.
+        if (result.length === 0) {
+            message.reply('Kérlek adj meg egy létező város/falu nevet!') // This tells them in chat that the place they entered is invalid.
+            return; // This exits the code so the rest doesn't run.
+        }
+
+        // Variables
+        var current = result[0].current; // This is a variable for the current part of the JSON output
+        var location = result[0].location; // This is a variable for the location part of the JSON output
+
+        // Let's use an embed for this.
+        const embed = new Discord.RichEmbed()
+            .setDescription(`**${current.skytext}**`) // This is the text of what the sky looks like, remember you can find all of this on the weather-js npm page.
+            .setAuthor(`Időjárás itt: ${current.observationpoint}`) // This shows the current location of the weather.
+            .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed
+            .setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex
+            .addField('Idő zóna',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation
+            .addField('Fokozat típusa',location.degreetype, true)// This is the field that shows the degree type, and is inline
+            .addField('Hőfok',`${current.temperature}°C`, true)
+            .addField('Hőérzet', `${current.feelslike}°C`, true)
+            .addField('Szél',current.winddisplay, true)
+            .addField('Páratartalom', `${current.humidity}%`, true)
+
+            // Now, let's display it when called
+            message.channel.send({embed});
+    });
+} else message.reply("Kérlek adj meg egy város/falu nevet!")
+}
 
 
+let nemitottrang = message.guild.roles.find(`name`, `muted`);
+if(!message.member.hasPermission("KICK_MEMBERS")) {
+if(message.member.roles.has(nemitottrang.id)) {
+    message.delete();
+}
+}
 
 let pluszplszplusz = message.guild.roles.find(`name`, `warn1`);
 if(!pluszplszplusz) {
@@ -759,9 +800,241 @@ if (cmd === `${prefix}warn`) {
 } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
 }
 
+// let warnolt = message.guild.roles.find(`name`, `warn4`);
+// if(message.member.roles.has(warnolt.id)) {
+//     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
+//     if(!message.member.hasPermission("KICK_MEMBERS")) {
+//     message.delete();
+//     message.reply("Túl sok warnod volt ezért a rendszer autómatikusan kickelt!");
+//     message.member.kick();
+//     }
+// }
+// }
 
 ////////////////////////////////matek
+if(cmd === `${prefix}matek`) {
+    if(cooldown.has(message.author.id)) {
+        message.delete();
+        return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
+    }
+        cooldown.add(message.author.id);
 
+
+    setTimeout(() => {
+        cooldown.delete(message.author.id)
+    }, sdseconds * 1000)
+  
+
+///////////////////////////// ifek
+    if(args[0] === `easy`){
+    let egy = Math.floor(Math.random() *200);
+    let keto = Math.floor(Math.random() *400);
+    let harom = Math.floor(Math.random() *100);
+    let negy = Math.floor(Math.random() *90)*2;
+    let ot = 2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let askArray = [`Mennyi? ${egy} + ${keto}`, `Mennyi? ${egy} + ${keto} - ${harom}`, `Mennyi? ${negy}:${ot}`];
+
+    let respondArray = [`${egy + keto}`, `${egy + keto - harom}`, `${negy / ot}`];
+
+    let num = Math.floor(Math.random() *askArray.length);
+
+    let  qEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .setThumbnail(uIcon)
+    .addField("**(EASY MODE)** Matematikai kvíz! Válaszolj a kérdésre 35mp belül!", askArray[num])
+    .addBlankField()
+    .setFooter(`${name}`)
+    .setTimestamp(message.createdAt);
+
+    const filter = m => m.author.id === message.author.id;
+    message.channel.send(qEmbed);
+    message.channel.awaitMessages(filter, {max: 1, time:35000}).then(collected => {
+
+        if(collected.first().content === "Nemtudom") return message.reply(`A megoldás ez volt: ${respondArray[num]}`);
+        let response = collected.first().content;
+
+        if(response === respondArray[num]) {
+
+            let kvizEmbed = new Discord.RichEmbed()
+            .setTitle(`${message.author.username}`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy!`)
+            .setColor("#1CEF5B")
+            .setTimestamp(message.createdAt)
+            .setFooter(`${name}`)
+
+            message.channel.send(kvizEmbed)
+            
+            message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
+
+        } else message.reply(`Hibás válasz. A megoldás ez volt: ${respondArray[num]}.`);
+            
+            
+
+    }).catch(err => {
+
+            message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
+
+    });
+    /////easy if vége
+    } else if(args[0] === `normal`) {
+        ///normal
+    let egy = Math.floor(Math.random() *1200);
+    let keto = Math.floor(Math.random() *2200);
+    let harom = Math.floor(Math.random() *300);
+    let negy = Math.floor(Math.random() *300)*2;
+    let ot = 2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let askArray = [`Mennyi? ${egy} + ${keto}`, `Mennyi? ${egy} + ${keto} - ${harom}`, `Mennyi? ${negy}:${ot}`];
+
+    let respondArray = [`${egy + keto}`, `${egy + keto - harom}`, `${negy / ot}`];
+
+    let num = Math.floor(Math.random() *askArray.length);
+
+    let  qEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .setThumbnail(uIcon)
+    .addField("**(NORMAL MODE)** Matematikai kvíz! Válaszolj a kérdésre 35mp belül!", askArray[num])
+    .addBlankField()
+    .setFooter(`${name}`)
+    .setTimestamp(message.createdAt);
+
+    const filter = m => m.author.id === message.author.id;
+    message.channel.send(qEmbed);
+    message.channel.awaitMessages(filter, {max: 1, time:35000}).then(collected => {
+
+        if(collected.first().content === "Nemtudom") return message.reply(`A megoldás ez volt: ${respondArray[num]}`);
+        let response = collected.first().content;
+
+        if(response === respondArray[num]) {
+
+            let kvizEmbed = new Discord.RichEmbed()
+            .setTitle(`${message.author.username}`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy!`)
+            .setColor("#1CEF5B")
+            .setTimestamp(message.createdAt)
+            .setFooter(`${name}`)
+
+            message.channel.send(kvizEmbed)
+            
+            message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
+
+        } else message.reply(`Hibás válasz. A megoldás ez volt: ${respondArray[num]}.`);
+            
+            
+
+    }).catch(err => {
+
+            message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
+
+    });
+    } else if(args[0] === `hard`) {
+    let egy = Math.floor(Math.random() *9000);
+    let keto = Math.floor(Math.random() *5000);
+    let harom = Math.floor(Math.random() *4000);
+    let negy = Math.floor(Math.random() *4120)*2;
+    let ot = 2;
+    let hat = Math.floor(Math.random() *9999999)*2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let askArray = [`Mennyi? ${egy} + ${keto}`, `Mennyi? ${egy} + ${keto} - ${harom}`, `Mennyi? ${negy}:${ot}`, `Mennyu? ${egy} + ${hat}`];
+
+    let respondArray = [`${egy + keto}`, `${egy + keto - harom}`, `${negy / ot}`, `${egy + hat}`];
+
+    let num = Math.floor(Math.random() *askArray.length);
+
+    let  qEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .setThumbnail(uIcon)
+    .addField("**(HARD MODE)** Matematikai kvíz! Válaszolj a kérdésre 35mp belül!", askArray[num])
+    .addBlankField()
+    .setFooter(`${name}`)
+    .setTimestamp(message.createdAt);
+
+    const filter = m => m.author.id === message.author.id;
+    message.channel.send(qEmbed);
+    message.channel.awaitMessages(filter, {max: 1, time:35000}).then(collected => {
+
+        if(collected.first().content === "Nemtudom") return message.reply(`A megoldás ez volt: ${respondArray[num]}`);
+        let response = collected.first().content;
+
+        if(response === respondArray[num]) {
+
+            let kvizEmbed = new Discord.RichEmbed()
+            .setTitle(`${message.author.username}`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy!`)
+            .setColor("#1CEF5B")
+            .setTimestamp(message.createdAt)
+            .setFooter(`${name}`)
+
+            message.channel.send(kvizEmbed)
+            
+            message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
+
+        } else message.reply(`Hibás válasz. A megoldás ez volt: ${respondArray[num]}.`);
+            
+            
+
+    }).catch(err => {
+
+            message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
+
+    });
+    } else {
+    let egy = Math.floor(Math.random() *1200);
+    let keto = Math.floor(Math.random() *2200);
+    let harom = Math.floor(Math.random() *300);
+    let negy = Math.floor(Math.random() *300)*2;
+    let ot = 2;
+    let uIcon = message.member.user.displthayAvatarURL;
+    let askArray = [`Mennyi? ${egy} + ${keto}`, `Mennyi? ${egy} + ${keto} - ${harom}`, `Mennyi? ${negy}:${ot}`];
+
+    let respondArray = [`${egy + keto}`, `${egy + keto - harom}`, `${negy / ot}`];
+
+    let num = Math.floor(Math.random() *askArray.length);
+
+    let  qEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .setThumbnail(uIcon)
+    .addField("**(NORMAL MODE)** Matematikai kvíz! Válaszolj a kérdésre 35mp belül!", askArray[num])
+    .addBlankField()
+    .setFooter(`${name}`)
+    .setTimestamp(message.createdAt);
+
+    const filter = m => m.author.id === message.author.id;
+    message.channel.send(qEmbed);
+    message.channel.awaitMessages(filter, {max: 1, time:35000}).then(collected => {
+
+        if(collected.first().content === "Nemtudom") return message.reply(`A megoldás ez volt: ${respondArray[num]}`);
+        let response = collected.first().content;
+
+        if(response === respondArray[num]) {
+
+            let kvizEmbed = new Discord.RichEmbed()
+            .setTitle(`${message.author.username}`)
+            .addField("Sikeresen teljesítetted a feladatot!", `Ügyes vagy!`)
+            .setColor("#1CEF5B")
+            .setTimestamp(message.createdAt)
+            .setFooter(`${name}`)
+
+            message.channel.send(kvizEmbed)
+            
+            message.reply("Sikeresen teljesítetted ezt a feladatot!").then(r => r.delete(6000));
+
+        } else message.reply(`Hibás válasz. A megoldás ez volt: ${respondArray[num]}.`);
+            
+            
+
+    }).catch(err => {
+
+            message.reply(`Lejárt az időd! A megoldás ez volt: ${respondArray[num]}.`);
+
+    });
+    }
+}
  
 
 
