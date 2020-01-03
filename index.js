@@ -711,12 +711,6 @@ if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of th
 }
 
 
-let nemitottrang = message.guild.roles.find(`name`, `muted`);
-if(!message.member.hasPermission("KICK_MEMBERS")) {
-if(message.member.roles.has(nemitottrang.id)) {
-    message.delete();
-}
-}
 
 let pluszplszplusz = message.guild.roles.find(`name`, `warn1`);
 if(!pluszplszplusz) {
