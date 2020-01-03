@@ -759,16 +759,6 @@ if (cmd === `${prefix}warn`) {
 } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
 }
 
-let warnolt = message.guild.roles.find(`name`, `warn4`);
-if(message.member.roles.has(warnolt.id)) {
-    if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
-    if(!message.member.hasPermission("KICK_MEMBERS")) {
-    message.delete();
-    message.reply("Túl sok warnod volt ezért a rendszer autómatikusan kickelt!");
-    message.member.kick();
-    }
-}
-}
 
 ////////////////////////////////matek
 
