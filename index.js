@@ -639,8 +639,8 @@ if (cmd === `${prefix}időnémítás`) {
 let nemitottrang = message.guild.roles.find(`name`, `mutedfactory`);
 if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
 if(message.member.hasPermission("KICK_MEMBERS")) {
-    
-} else if(message.member.roles.has(nemitottrang.id)) {
+
+} else if(message.member.roles.has(nemitottrang)) {
     message.delete();
 }
 }
@@ -1258,5 +1258,6 @@ if(cmd === `${prefix}i`) {
 
    
 })
+ 
  
 bot.login(process.env.BOT_TOKEN);
