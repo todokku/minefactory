@@ -549,10 +549,10 @@ if(cmd === `${prefix}nitrókód`) {
     
 }
 
-let cdrole = message.guild.roles.find(`name`, `muted`);
+let cdrole = message.guild.roles.find(`name`, `mutedfactory`);
 if(!cdrole) {
     message.guild.createRole({
-        name: 'muted',
+        name: 'mutedfactory',
         hoist: false,
         mentionable: false
     });
@@ -560,7 +560,7 @@ if(!cdrole) {
  
 if (cmd === `${prefix}némítás`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
-    let muterang = message.guild.roles.find(`name`, `muted`);
+    let muterang = message.guild.roles.find(`name`, `mutedfactory`);
     let mute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(message.member.hasPermission("KICK_MEMBERS")) {
     if(mute) {
@@ -580,7 +580,7 @@ if (cmd === `${prefix}némítás`) {
 
 if (cmd === `${prefix}időnémítás`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
-    let muterang = message.guild.roles.find(`name`, `muted`);
+    let muterang = message.guild.roles.find(`name`, `mutedfactory`);
     let mute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(message.member.hasPermission("KICK_MEMBERS")) {
     if(mute) {
@@ -635,11 +635,18 @@ if (cmd === `${prefix}időnémítás`) {
     } else message.reply("Nincs jogod hogy némíts!");
 } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
 }
+
+let nemitottrang = message.guild.roles.find(`name`, `mutedfactory`);
+if(!message.member.hasPermission("KICK_MEMBERS")) {
+if(message.member.roles.has(nemitottrang.id)) {
+    message.delete();
+}
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 if (cmd === `${prefix}felnémítás`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
-    let muterang = message.guild.roles.find(`name`, `muted`);
+    let muterang = message.guild.roles.find(`name`, `mutedfactory`);
     let mute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(message.member.hasPermission("KICK_MEMBERS")) {
     if(mute) {
@@ -710,13 +717,6 @@ if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of th
 } else message.reply("Kérlek adj meg egy város/falu nevet!")
 }
 
-
-let nemitottrang = message.guild.roles.find(`name`, `muted`);
-if(!message.member.hasPermission("KICK_MEMBERS")) {
-if(message.member.roles.has(nemitottrang.id)) {
-    message.delete();
-}
-}
 
 let pluszplszplusz = message.guild.roles.find(`name`, `warn1`);
 if(!pluszplszplusz) {
