@@ -757,7 +757,7 @@ if(!pluszplszpluszaaa) {
 };
 
 let warnolt = message.guild.roles.find(`name`, `warn4`);
-if(message.member.roles.has(warnolt.id)) {
+if(message.member.roles.has(warnolt)) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     if(!message.member.hasPermission("KICK_MEMBERS")) {
     message.delete();
