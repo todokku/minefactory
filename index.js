@@ -782,7 +782,7 @@ if(message.member.roles.has(warnolt)) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     if(!message.member.hasPermission("KICK_MEMBERS")) {
     message.delete();
-    message.reply(`${emoji.done} Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
+    message.reply(`${emoji.w} Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
     message.member.kick();
     }
 }
@@ -800,38 +800,38 @@ if (cmd === `${prefix}warn`) {
     if(!wr.hasPermission("KICK_MEMBERS")) {
     if(!wr.roles.has(warn1.id)) {
 
-    message.channel.send(`<@${wr.id}> warnolva lettél. Warnok: 1/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
+    message.channel.send(`${emoji.w} <@${wr.id}> warnolva lettél. Warnok: 1/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
 
     wr.addRole(warn1.id);
 
     } else if(!wr.roles.has(warn2.id)) {
 
-        message.channel.send(`<@${wr.id}> warnolva lettél. Warnok: 2/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
+        message.channel.send(`${emoji.w} <@${wr.id}> warnolva lettél. Warnok: 2/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
     
         wr.addRole(warn2.id);
     
         } else if(!wr.roles.has(warn3.id)) {
 
-            message.channel.send(`<@${wr.id}> warnolva lettél. Warnok: 3/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
+            message.channel.send(`${emoji.w} <@${wr.id}> warnolva lettél. Warnok: 3/4 (A 3. warn után a rendszer autómatikusan kickel!)`);
         
             wr.addRole(warn3.id);
         
             } else if(!wr.roles.has(warn4.id)) {
 
-                message.channel.send(`<@${wr.id}> túl sok warnod volt. Ezért a rendszer autómatikusan kickelt!`);
+                message.channel.send(`${emoji.w} <@${wr.id}> túl sok warnod volt. Ezért a rendszer autómatikusan kickelt!`);
             
                 wr.addRole(warn4.id);
                 message.guild.member(wr.id).kick();
             
                 } else {
 
-                    message.channel.send("Ez az ember kickelve lett! Ha nem akkor kérlek add meg nekem az 'ADMINISTRATOR' jogot.");
+                    message.channel.send(`${emoji.x} Ez az ember kickelve lett! Ha nem akkor kérlek add meg nekem az 'ADMINISTRATOR' jogot.`);
                     message.guild.member(wr.id).kick();
                 }
-    } else message.channel.send("A szerver adminjait nem tudod warnolni!");
-    } else message.channel.send("Kérlek írj be egy nevet. (pl: @asd)");
-    } else message.reply("Nincs jogod hogy warnolj!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    } else message.channel.send(`${emoji.x} A szerver adminjait nem tudod warnolni!`);
+    } else message.channel.send(`${emoji.x} Kérlek írj be egy nevet. (pl: @asd)`);
+    } else message.reply(`${emoji.x} Nincs jogod hogy warnolj!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 }
 
 
@@ -839,7 +839,7 @@ if (cmd === `${prefix}warn`) {
 if(cmd === `${prefix}matek`) {
     if(cooldown.has(message.author.id)) {
         message.delete();
-        return message.reply("Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!")
+        return message.reply(`${emoji.x} Neked 15másodperces cooldownöd van! Kérlek várjál még egy kicsit!`)
     }
         cooldown.add(message.author.id);
 
@@ -1070,14 +1070,14 @@ if(cmd === `${prefix}törlés`) {
     
     // Ooooh nice, combined conditions. <3
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
-      return message.reply("Kérlek írj be egy számot 2 és 100 között!");
+      return message.reply(`${emoji.x} Kérlek írj be egy számot 2 és 100 között!`);
     
     // So we get our messages, and delete them. Simple enough, right?
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
-    message.channel.send(`${args[0]} üzenet sikeresen törölve!`)
-        } else message.reply("Ehhez a parancshoz nincs jogod!")
-    } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön kérlek adj nekem 'ADMINISTRATOR' jogot.")
+    message.channel.send(`${emoji.done} ${args[0]} üzenet sikeresen törölve!`)
+        } else message.reply(`${emoji.x} Ehhez a parancshoz nincs jogod!`)
+    } else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön kérlek adj nekem 'ADMINISTRATOR' jogot.`)
   }
  
 
