@@ -257,7 +257,25 @@ if(cmd === `${prefix}serverinfo`) {
         .addField(`Rangok:`, guild.roles.map(roles => `${roles}`).join(' '), true)
         .setThumbnail(message.guild.iconURL)
         .setFooter(`${name}`);
-    message.channel.send({embed});
+    message.channel.send({embed})
+          .catch(error => {
+            const embedke = new Discord.RichEmbed()
+            .setAuthor(message.guild.name)
+            .addField("Név:", message.guild.name, true)
+            .addField("ID:", message.guild.id, true)
+            .addField("Tulaj:", `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`, true)
+            .addField("Régió:", region[message.guild.region], true)
+            .addField("Összes | Ember | Bot", `${message.guild.members.size} | ${message.guild.members.filter(member => !member.user.bot).size} | ${message.guild.members.filter(member => member.user.bot).size}`, true)
+            .addField("Biztonsági szint:", verifLevels[message.guild.verificationLevel], true)
+            .addField("Csatornák:", message.guild.channels.size, true)
+            .addField("Rangok száma:", message.guild.roles.size, true)
+            .addField("Szerver létrehozása:", `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`, true)
+            .addField(`Rangok:`, "Túl sok rang van a szerveren! (max 40 rangot lehet megjeleníteni!)")
+            .setThumbnail(message.guild.iconURL)
+            .setFooter(`${name}`);
+        message.channel.send({embedke})
+          });
+      
 
 }
 
