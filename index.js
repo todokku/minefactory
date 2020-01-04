@@ -326,6 +326,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}kick <@név>`, "Ember kickelése. **Moderator**")
     .addField(`${prefix}warn <@név>`, "Ember warnolása. **Moderator**")
     .addField(`${prefix}ban <@név>`, "Ember bannolása. **Moderator**")
+    .addField(`${prefix}törlés <2-100>`, "Üzenetek törlése. **Moderator**")
     .addField(`${prefix}nyeremény <tárgy> <5m, 10m, 30m, 1h>`, "Nyeremény játék létrehozása. **Moderator**")
     .addField(`${prefix}időnémítás <@név> <3m, 5m, 15m, 30m, 1h>`, "Ember némítása egy meghatározott időre! **Moderator**")
     .addBlankField()
@@ -1038,6 +1039,26 @@ if(cmd === `${prefix}matek`) {
     });
     }
 }
+
+if(cmd === `${prefix}törlés`) {
+    if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
+        if(message.member.hasPermission("KICK_MEMBERS")) {
+    // This command removes all messages from all users in the channel, up to 100.
+    
+    // get the delete count, as an actual number.
+    const deleteCount = parseInt(args[0], 10);
+    
+    // Ooooh nice, combined conditions. <3
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("Kérlek írj be egy számot 2 és 100 között!");
+    
+    // So we get our messages, and delete them. Simple enough, right?
+    const fetched = await message.channel.fetchMessages({limit: deleteCount});
+    message.channel.bulkDelete(fetched)
+    message.channel.send(`${args[0]} üzenet sikeresen törölve!`)
+        } else message.reply("Ehhez a parancshoz nincs jogod!")
+    } else message.reply("Ahhoz hogy ez a parancs sikeresen működjön kérlek adj nekem 'ADMINISTRATOR' jogot.")
+  }
  
 
 
