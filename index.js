@@ -89,7 +89,7 @@ if(cmd === `${prefix}nyeremény`) {
     let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
-    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}${emoji.gg}. (<@${asd.user.id}>)`);
     message.channel.send("**A nyeremény játéknak vége!**")
     }, 300000)
 
@@ -110,7 +110,7 @@ if(cmd === `${prefix}nyeremény`) {
     let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
-    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+        message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}${emoji.gg}. (<@${asd.user.id}>)`);
     message.channel.send("**A nyeremény játéknak vége!**")
     }, 600000)
 
@@ -130,7 +130,7 @@ if(cmd === `${prefix}nyeremény`) {
     let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
-    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+        message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}${emoji.gg}. (<@${asd.user.id}>)`);
     message.channel.send("**A nyeremény játéknak vége!**")
     }, 1800000)
 
@@ -150,7 +150,7 @@ if(cmd === `${prefix}nyeremény`) {
     let asd = message.guild.members.filter(member => !member.user.bot).random();
 
     setTimeout(() => {
-    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+        message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}${emoji.gg}. (<@${asd.user.id}>)`);
     message.channel.send("**A nyeremény játéknak vége!**")
     }, 3600000)
 
@@ -158,14 +158,14 @@ if(cmd === `${prefix}nyeremény`) {
 
     let asd = message.guild.members.filter(member => !member.user.bot).random();
 
-    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}. (<@${asd.user.id}>)`);
+    message.channel.send(`A nyeremény játék nyertese: ${asd.user.username}${emoji.gg}. (<@${asd.user.id}>)`);
 
     }else {
-        message.channel.send('Kérlek add meg az időt! (gyors, 5m, 10m, 30m, 1h)');
+        message.channel.send(`${emoji.x} Kérlek add meg az időt! (gyors, 5m, 10m, 30m, 1h)`);
     }
 
-} else message.channel.send('Kérlek add meg a nyeremény játék tárgyát!');
-    } else message.reply("Ehhez a parancshoz nincs jogod!")
+} else message.channel.send(`${emoji.x} Kérlek add meg a nyeremény játék tárgyát!`);
+    } else message.reply(`${emoji.x} Ehhez a parancshoz nincs jogod!`)
     
     
     
@@ -176,6 +176,7 @@ if(cmd === `${prefix}nyeremény`) {
 
 if(cmd === `${prefix}ötlet`){
     if(args[0]) {
+        message.delete().catch();
 
     bot.fetchUser('389003470117797889').then((user) => {
         user.send(`${message.author.username} ötlete: ` + args.join(' '));
@@ -185,8 +186,8 @@ if(cmd === `${prefix}ötlet`){
     //     user.send(`${message.author.username} ötlete: ` + args[0]);
     // });
 
-        message.channel.send("Az ötleted sikeresen elküldve egy fejlesztőnek!");
-} else message.channel.send('Kérlek adj meg egy szöveget!');
+        message.channel.send(`${emoji.done} *Az ötleted sikeresen elküldve egy fejlesztőnek!*`);
+} else message.channel.send(`${emoji.x} Kérlek adj meg egy szöveget!`);
 
 }
 
@@ -282,7 +283,7 @@ if(cmd === `${prefix}serverinfo`) {
 
 if (cmd === `${prefix}profilkép`) {
     let avatarUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if (!avatarUser) return message.channel.send("Kérlek adj meg egy nevet! pl: @asd123");
+    if (!avatarUser) return message.channel.send(`${emoji.x} Kérlek adj meg egy nevet! pl: @asd123`);
     let userAvatar = avatarUser.user.displayAvatarURL;
     let avatarUserName = avatarUser.user.username;
 
@@ -372,7 +373,7 @@ if(cmd === `${prefix}meghívó`) {
 }
 
 if(cmd === `${prefix}szavazás`){
-    if(!args[0]) return message.channel.send('Kérlek adj meg egy tárgyat!');
+    if(!args[0]) return message.channel.send(`${emoji.x} Kérlek adj meg egy tárgyat!`);
 
     const szavazásEmbed = new Discord.RichEmbed()
         .setColor('#8c45a8')
@@ -426,12 +427,12 @@ if(cmd === `${prefix}kick`) {
     message.channel.send(kickEmbed);
     console.log(`${message.author.id} kickelte ${kickPerson}!`);
 
-    } else message.channel.send("A szerver adminjait nem tudod kickelni!");
+    } else message.channel.send(`${emoji.x} A szerver adminjait nem tudod kickelni!`);
 
-    } else message.channel.send("Kérlek adj meg egy nevet! (pl: @asd)");
+    } else message.channel.send(`${emoji.x} Kérlek adj meg egy nevet! (pl: @asd)`);
 
-    } else message.channel.send("Neked nincs jogod hogy kickelj!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    } else message.channel.send(`${emoji.x} Neked nincs jogod hogy kickelj!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 
 }
 
@@ -457,17 +458,17 @@ if(cmd === `${prefix}ban`) {
     message.channel.send(kickEmbed);
     console.log(`${message.author.id} bannolta: ${kickPerson}!`);
 
-    } else message.channel.send("A szerver adminjait nem tudod bannolni!");
+    } else message.channel.send(`${emoji.x} A szerver adminjait nem tudod bannolni!`);
 
-    } else message.channel.send("Kérlek adj meg egy nevet! (pl: @asd)");
+    } else message.channel.send(`${emoji.x} Kérlek adj meg egy nevet! (pl: @asd)`);
 
-    } else message.channel.send("Neked nincs jogod hogy bannolj!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    } else message.channel.send(`${emoji.x} Neked nincs jogod hogy bannolj!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 
 }
 
 if(cmd === `${prefix}duma`) {
-    if(!message.member.hasPermission("KICK_MEMBERS")) return message.reply("Nincs jogod ehhez a parancshoz!");
+    if(!message.member.hasPermission("KICK_MEMBERS")) return message.reply(`${emoji.x} Nincs jogod ehhez a parancshoz!`);
     let bMessage = args.join(" ");
     message.delete().catch();
     message.channel.send(bMessage);
@@ -479,15 +480,15 @@ if(cmd === `${prefix}ranglétrehoz`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     message.delete().catch();
     if(message.member.hasPermission("KICK_MEMBERS")) {
-    if(!args[0]) return message.reply('Kérlek add meg az új rang nevét!');
+    if(!args[0]) return message.reply(`${emoji.x} Kérlek add meg az új rang nevét!`);
     message.guild.createRole({
         name: `${args[0]}`,
         hoist: true,
         mentionable: false
     });
-    message.reply(`Létrehozta a(z) ${args[0]} rangot!`)
-} else message.reply("Nincs jogod ehhez a parancshoz!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    message.reply(`${emoji.done} Létrehozta a(z) ${args[0]} rangot!`)
+} else message.reply(`${emoji.x} Nincs jogod ehhez a parancshoz!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 }
 
 if (cmd === `${prefix}cigi`) {
@@ -590,11 +591,11 @@ if (cmd === `${prefix}némítás`) {
 
     mute.addRole(muterang.id);
 
-    } else message.channel.send("Ez az ember már némítva van!")
-    } else message.channel.send("A szerver adminjait nem tudod némítani!");
-    } else message.channel.send("Kérlek írj be egy nevet. (pl: @asd)");
-    } else message.reply("Nincs jogod hogy némíts!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    } else message.channel.send(`${emoji.x} Ez az ember már némítva van!`)
+    } else message.channel.send(`${emoji.x} A szerver adminjait nem tudod némítani!`);
+    } else message.channel.send(`${emoji.x} Kérlek írj be egy nevet. (pl: @asd)`);
+    } else message.reply(`${emoji.x} Nincs jogod hogy némíts!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 }
 
 if (cmd === `${prefix}időnémítás`) {
@@ -608,7 +609,7 @@ if (cmd === `${prefix}időnémítás`) {
     if(!mute.hasPermission("KICK_MEMBERS")) {
     if(!mute.roles.has(muterang.id)) {
         if(args[1] === `3m`) { 
-            message.channel.send(`<@${mute.id}> némítva lett 3 percre!`)
+            message.channel.send(`${emoji.done} <@${mute.id}> némítva lett 3 percre!`)
 
             mute.addRole(muterang.id);
 
@@ -616,7 +617,7 @@ if (cmd === `${prefix}időnémítás`) {
                 mute.removeRole(muterang.id);
             }, 180000);
         } else if(args[1] === `5m`) { 
-            message.channel.send(`<@${mute.id}> némítva lett 5 percre!`)
+            message.channel.send(`${emoji.done} <@${mute.id}> némítva lett 5 percre!`)
 
             mute.addRole(muterang.id);
 
@@ -624,7 +625,7 @@ if (cmd === `${prefix}időnémítás`) {
                 mute.removeRole(muterang.id);
             }, 300000);
         } else if(args[1] === `15m`) { 
-            message.channel.send(`<@${mute.id}> némítva 15 percre!`)
+            message.channel.send(`${emoji.done} <@${mute.id}> némítva 15 percre!`)
 
             mute.addRole(muterang.id);
 
@@ -632,7 +633,7 @@ if (cmd === `${prefix}időnémítás`) {
                 mute.removeRole(muterang.id);
             }, 900000);
         } else if(args[1] === `30m`) { 
-            message.channel.send(`<@${mute.id}> némítva 30 percre!`)
+            message.channel.send(`${emoji.done} <@${mute.id}> némítva 30 percre!`)
 
             mute.addRole(muterang.id);
 
@@ -640,19 +641,19 @@ if (cmd === `${prefix}időnémítás`) {
                 mute.removeRole(muterang.id);
             }, 1800000);
         } else if(args[1] === `1h`) { 
-            message.channel.send(`<@${mute.id}> némítva lett 1órára!`)
+            message.channel.send(`${emoji.done} <@${mute.id}> némítva lett 1órára!`)
 
             mute.addRole(muterang.id);
 
             setTimeout(() => {
                 mute.removeRole(muterang.id);
             }, 3600000);
-        } else return message.reply("Kérlek írj be egy időt! (3m, 5m, 15m, 30m, 1h)")
-    } else message.channel.send("Ez az ember már némítva van!");
-    } else message.channel.send("A szerver adminjait nem tudod némítani!");
-    } else message.channel.send("Kérlek írj be egy nevet. (pl: @asd)");
-    } else message.reply("Nincs jogod hogy némíts!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+        } else return message.reply(`${emoji.x} Kérlek írj be egy időt! (3m, 5m, 15m, 30m, 1h)`)
+    } else message.channel.send(`${emoji.x} Ez az ember már némítva van!`);
+    } else message.channel.send(`${emoji.x} A szerver adminjait nem tudod némítani!`);
+    } else message.channel.send(`${emoji.x} Kérlek írj be egy nevet. (pl: @asd)`);
+    } else message.reply(`${emoji.x} Nincs jogod hogy némíts!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 }
 
 let nemitottrang = message.guild.roles.find(`name`, `mutedfactory`);
@@ -673,14 +674,14 @@ if (cmd === `${prefix}felnémítás`) {
     if(mute) {
     if(mute.roles.has(muterang.id)) {
 
-    message.channel.send(`<@${mute.id}> -nak/nek fel lett oldva a némítása!`)
+    message.channel.send(`${emoji.done} <@${mute.id}> -nak/nek fel lett oldva a némítása!`)
 
     mute.removeRole(muterang.id);
 
-    } else message.channel.send("Ez az ember nincs némítva!")
-    } else message.channel.send("Kérlek írj be egy nevet. (pl: @asd)");
-    } else message.reply("Nincs jogod hogy felnémíts!");
-} else message.reply("Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.")
+    } else message.channel.send(`${emoji.x} Ez az ember nincs némítva!`)
+    } else message.channel.send(`${emoji.x} Kérlek írj be egy nevet. (pl: @asd)`);
+    } else message.reply(`${emoji.x} Nincs jogod hogy felnémíts!`);
+} else message.reply(`${emoji.x} Ahhoz hogy ez a parancs sikeresen működjön ahhoz nekem administratornak kéne lennem. Kérlek add meg nekem az 'ADMINISTRATOR' jogot.`)
 }
 
 if(cmd === `${prefix}macska`) {
@@ -711,7 +712,7 @@ if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of th
 
         // We also want them to know if a place they enter is invalid.
         if (result.length === 0) {
-            message.reply('Kérlek adj meg egy létező város/falu nevet!') // This tells them in chat that the place they entered is invalid.
+            message.reply(`${emoji.x} Kérlek adj meg egy létező város/falu nevet!`) // This tells them in chat that the place they entered is invalid.
             return; // This exits the code so the rest doesn't run.
         }
 
@@ -735,7 +736,7 @@ if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of th
             // Now, let's display it when called
             message.channel.send({embed});
     });
-} else message.reply("Kérlek adj meg egy város/falu nevet!")
+} else message.reply(`${emoji.x} Kérlek adj meg egy város/falu nevet!`)
 }
 
 
@@ -780,7 +781,7 @@ if(message.member.roles.has(warnolt)) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     if(!message.member.hasPermission("KICK_MEMBERS")) {
     message.delete();
-    message.reply("Túl sok warnod volt ezért a rendszer autómatikusan kickelt!");
+    message.reply(`${emoji.done} Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
     message.member.kick();
     }
 }
