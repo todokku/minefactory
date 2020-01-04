@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
 const fs = require("fs");
+const emoji = require("./emoji.json");
 const ms = require("ms");
 const moment = require("moment");
 //fs-extra//emoji.szena mondjuk xd
