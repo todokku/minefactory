@@ -406,6 +406,28 @@ if (cmd === `${prefix}üzemidő`) {
     message.channel.send(uptimeEmbed);
 }
 
+// if(cmd === `${prefix}troll`){
+//     if(cooldown.has(message.author.id)) {
+//         message.delete();
+//         return message.channel.send(`<@${message.author.id}> Csak 2.5percenként tudsz trollkodni!`)
+//     }
+//         cooldown.add(message.author.id);
+
+
+//     setTimeout(() => {
+//         cooldown.delete(message.author.id)
+//     }, sdseconds * 150000)
+//     let asd = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+//     let bMessage = args.join(" ");
+//     if (asd) {
+//         if(asd.user.id === "439676294821576705") return message.channel.send(`MI VAN TE SZARHÁZI? <@${asd.id}> -T AKAROD PINGELNI? EZ NEM FOG MENNI TE GYÁSZ, A NAGY VAZÍR SÉRTHETETLEN! XD`);
+//         bot.fetchUser(asd.id,false).then(user => {
+//             user.send(`<@${asd.id}> ${bMessage}`,) 
+//     })
+//         message.reply(`<@${asd.id}> sikeresen megtrollkodva! XDD`)
+//     } else message.reply("Kérlek írj be egy nevet! pl: @porba")
+// }
+
 if(cmd === `${prefix}kick`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     if (message.member.hasPermission("KICK_MEMBERS")) {
@@ -661,7 +683,7 @@ let nemitottrang = message.guild.roles.find(`name`, `mutedfactory`);
 if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
 if(message.member.hasPermission("KICK_MEMBERS")) {
 
-} else if(message.member.roles.has(nemitottrang)) {
+} else if(message.member.roles.has(nemitottrang.id)) {
     message.delete();
 }
 }
@@ -703,6 +725,7 @@ if(cmd === `${prefix}macska`) {
 
         message.channel.send(maEmbed);
 }
+
 
 if(cmd === `${prefix}időjárás`){ // This checks to see if the beginning of the message is calling the weather command.
     // You can find some of the code used here on the weather-js npm page in the description.
@@ -778,10 +801,9 @@ if(!pluszplszpluszaaa) {
 };
 
 let warnolt = message.guild.roles.find(`name`, `warn4`);
-if(message.member.roles.has(warnolt)) {
+if(message.member.roles.has(warnolt.id)) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
     if(!message.member.hasPermission("KICK_MEMBERS")) {
-    message.delete();
     message.channel.send(`${emoji.w} <@${warnolt.id}> Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
     message.member.kick();
     }
