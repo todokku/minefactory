@@ -1129,9 +1129,9 @@ if(cmd === `${prefix}fizika`) {
     let ot = 2;
     let hat = Math.floor(Math.random() *9999999)*2;
     let uIcon = message.member.user.displthayAvatarURL;
-    let askArray = [`Ez egy kérdés?`, `Molnár Kiki tömege: ${keto}kg mennyi N rővel nal nyomja a mérleget?`, `W=${negy} s=${egy*2} F=?`, `F=${egy}N s=${harom}m W=?`,
-                    ]
-    let respondArray = [`igen`, `${keto * 10}N`, `${negy/egy*2}N`, `${egy*harom}`]
+    let askArray = [`Ez egy kérdés?`, `Molnár Kiki tömege: ${keto}kg. Mennyi N erővel nyomja a mérleget?`, `W=${negy} s=${egy*2}m F=?`, `F=${egy}N s=${harom}m W=?`,
+                    `Mennyi a sebesség? t=${egy*2}s s=${harom*2}m v=? (Erdedményt így add meg: 0m/s)`]
+    let respondArray = [`igen`, `${keto * 10}N`, `${negy/egy*2}N`, `${egy*harom}J`, `${harom*2/egy*2}m/s`]
 
     let num = Math.floor(Math.random() *askArray.length);
 
