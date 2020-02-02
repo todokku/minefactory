@@ -10,6 +10,7 @@ const moment = require("moment");
 let name = "© Minefactory ©";
 const superagent = require("superagent");
 let cooldown = new Set();
+let ldw = new Set();
 let sdseconds = 15;
 const weather = require('weather-js');
 // const randomPuppy = require("random-puppy");
