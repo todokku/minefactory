@@ -1394,5 +1394,5 @@ if(cmd === `${prefix}i`) {
    
 })
  
- 
+
 bot.login(process.env.BOT_TOKEN);
