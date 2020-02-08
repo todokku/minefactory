@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
-const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
 const ms = require("ms");
 const moment = require("moment");
