@@ -21,7 +21,8 @@
     "weather": "^1.0.4",
     "weather-js": "^2.0.0",
     "weather.js": "^0.1.0",
-    "ytdl-core": "^1.0.7"
+    "ytdl-core": "^1.0.7",
+    "ytsearcher": "^1.2.2"
   },
   "devDependencies": {},
   "scripts": {
