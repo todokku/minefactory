@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
+const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
 const ms = require("ms");
 const moment = require("moment");
@@ -1395,8 +1396,8 @@ if(cmd === `${prefix}i`) {
 
 ////zene
  if(cmd === `${prefix}zene`) {
-        let url = args.join("");
-        if(!url) {
+        let url = args[0];
+        if(args[0]) {
         let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
         if(VoiceChannel != null)
         {
@@ -1412,8 +1413,8 @@ if(cmd === `${prefix}i`) {
                 })
             })
             .catch();
-        } else message.reply("Hiba!")
-    }
+        } else message.reply("Ahhoz hogy ez a parancs működjön kérlek lépj be egy voice channelbe!")
+    } else message.reply("Kérlek írj be egy youtube linket!")
 }
 
     if(message.content.toLowerCase().startsWith("!kilép"))
