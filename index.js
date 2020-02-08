@@ -1,10 +1,11 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
+const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
-const emoji = require("./emoji.json");
 const ms = require("ms");
 const moment = require("moment");
+const emoji = require("./emoji.json");
 //fs-extra//emoji.szena mondjuk xd
 // const cooldown = require("./cooldown.json");
 let name = "© Minefactory ©";
@@ -15,8 +16,7 @@ let sdseconds = 15;
 const weather = require('weather-js');
 // const randomPuppy = require("random-puppy");
 
-////////////////////////////////////////////////
-
+const money = require("./money.json");
 ////////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
@@ -71,7 +71,37 @@ bot.on("message", async message => { //bot on kezdete
 //     let asd = message.guild.roles.find(`name`, `rainbow`);
 //         asd.setColor("RANDOM");
 // }, 1000) 
+if(!money[message.author.id]) {
+    money[message.author.id] = {
+        money: 100
+    };
+}
 
+fs.writeFile("./money.json", JSON.stringify(money), (err) => {
+    if(err) console.log(err);
+});
+
+let selfMoney = money[message.author.id].money;
+
+if(cmd === `${prefix}money`) {
+    let bicon = message.author.displayAvatarURL;
+ 
+    let moneyEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setColor("RANDOM")
+    .addField("Egyenleged:", `*${selfMoney}`)
+    .setThumbnail(bicon)
+    .addBlankField()
+    .setTimestamp(message.createdAt)
+    .setFooter("TESZT");
+ 
+    message.channel.send(moneyEmbed)
+
+    money[message.author.id] = {
+        money: selfMoney + 100
+    }
+}
+///////////////////testing area
 
 if(cmd === `${prefix}nyeremény`) {
     if (message.member.hasPermission("KICK_MEMBERS")) {
@@ -1391,7 +1421,9 @@ if(cmd === `${prefix}i`) {
 
         //Itt a bot on vége.
 
-
+        fs.writeFile("./money.json", JSON.stringify(money), (err) => {
+            if(err) console.log(err);
+        });
    
 })
  
