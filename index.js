@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
+const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
 const ms = require("ms");
 const moment = require("moment");
@@ -15,7 +16,9 @@ let sdseconds = 15;
 const weather = require('weather-js');
 // const randomPuppy = require("random-puppy");
 
-const money = require("./money.json");
+const ytdl = require('ytdl-core');
+const {YTSearcher} = require('ytsearcher');
+const streamOptions = { seek: 0.01, volume: 1.001 };
 ////////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
@@ -70,36 +73,7 @@ bot.on("message", async message => { //bot on kezdete
 //     let asd = message.guild.roles.find(`name`, `rainbow`);
 //         asd.setColor("RANDOM");
 // }, 1000) 
-if(!money[message.author.id]) {
-    money[message.author.id] = {
-        money: 100
-    };
-}
 
-fs.writeFile("./money.json", JSON.stringify(money), (err) => {
-    if(err) console.log(err);
-});
-
-let selfMoney = money[message.author.id].money;
-
-if(cmd === `${prefix}money`) {
-    let bicon = message.author.displayAvatarURL;
- 
-    let moneyEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.username)
-    .setColor("RANDOM")
-    .addField("Egyenleged:", `*${selfMoney}`)
-    .setThumbnail(bicon)
-    .addBlankField()
-    .setTimestamp(message.createdAt)
-    .setFooter("TESZT");
- 
-    message.channel.send(moneyEmbed)
-
-    money[message.author.id] = {
-        money: selfMoney + 100
-    }
-}
 ///////////////////testing area
 
 if(cmd === `${prefix}nyeremény`) {
@@ -1420,9 +1394,41 @@ if(cmd === `${prefix}i`) {
 
         //Itt a bot on vége.
 
-        fs.writeFile("./money.json", JSON.stringify(money), (err) => {
-            if(err) console.log(err);
-        });
+////zene
+ if(cmd === `${prefix}zene`) {
+        let url = args.join("");
+        if(!url) {
+        let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
+        if(VoiceChannel != null)
+        {
+            console.log(VoiceChannel.name + " keresés " + VoiceChannel.type + " channel.");
+            VoiceChannel.join()
+            .then(connection => {
+                console.log("A bot csatlakozott a szobához.");
+                const stream = ytdl(url, { filter : 'audioonly' });
+                const dispatcher = connection.playStream(stream, streamOptions);
+
+                dispatcher.on('end', () => {
+                    VoiceChannel.leave();
+                })
+            })
+            .catch();
+        } else message.reply("Hiba!")
+    }
+}
+
+    if(message.content.toLowerCase().startsWith("!kilép"))
+    {
+    let args = message.content.split(" ");
+    let url = args[1];
+    let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
+    if(VoiceChannel != null)
+    {            
+        VoiceChannel.leave();    
+        message.reply("kitett a duma szobábol!");
+    }
+    }
+
    
 })
  
