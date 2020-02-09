@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
+const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
 const ms = require("ms");
 const moment = require("moment");
@@ -18,6 +19,10 @@ const weather = require('weather-js');
 const ytdl = require('ytdl-core');
 const {YTSearcher} = require('ytsearcher');
 const streamOptions = { seek: 0.01, volume: 1.001 };
+// const {YouTubeAPIKey} = require('./youapi.json');
+// const YouTube = require('simple-youtube-api');
+// bot.youtube = new YouTube(YouTubeAPIKey);
+// const queue = new Map();
 ////////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
@@ -1394,32 +1399,9 @@ if(cmd === `${prefix}i`) {
         //Itt a bot on vége.
 
 ////zene
- if(cmd === `${prefix}zene`) {
-        let url = args[0];
-        if(args[0]) {
-        let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
-        if(VoiceChannel != null)
-        {
-            console.log(VoiceChannel.name + " keresés " + VoiceChannel.type + " channel.");
-            VoiceChannel.join()
-            .then(connection => {
-                console.log("A bot csatlakozott a szobához.");
-                const stream = ytdl(url, { filter : 'audioonly' });
-                const dispatcher = connection.playStream(stream, streamOptions);
-
-                dispatcher.on('end', () => {
-                    VoiceChannel.leave();
-                })
-            })
-            .catch();
-        } else message.reply("Ahhoz hogy ez a parancs működjön kérlek lépj be egy voice channelbe!")
-    } else message.reply("Kérlek írj be egy youtube linket!")
-}
 
     if(message.content.toLowerCase().startsWith("!kilép"))
     {
-    let args = message.content.split(" ");
-    let url = args[1];
     let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
     if(VoiceChannel != null)
     {            
@@ -1427,8 +1409,85 @@ if(cmd === `${prefix}i`) {
         message.reply("kitett a duma szobábol!");
     }
     }
+    ///////////////////////////loading
+    ///////////////////////////////////////
+    /////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    if(cmd === `${prefix}play`){
+        
+    let VC = message.member.voiceChannel;
+    if (!VC) return message.reply("Kérlek lépj be egy voice channel be!")
 
-   
+    let url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : '';
+    let pl = /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
+
+    // let searchString = args.join(' ');
+    if (!url || !pl) return message.reply(`kérlek írj zene címet vagy url linket!`)
+
+    let perms = VC.permissionsFor(message.client.user);
+    if (!perms.has('CONNECT')) return message.reply(`Nem tudok csatlakozni a hang csatornába mert nincs jogom hogy csatlakozzak ehhez a hang csatornához!`)
+    if (!perms.has('SPEAK')) return message.reply(`Nem tudok zenét indítani mert nincs jogom hogy beszéljek!`)
+    let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
+    if(message.guild.channels.find(channel => channel.id === message.guild.member(bot.user).voiceChannelID)){
+    VoiceChannel.join()
+    .then(connection => {
+        console.log("A bot csatlakozott a szobához.");
+        const stream = ytdl(url, { filter : 'audioonly' });
+        const dispatcher = connection.playStream(stream, streamOptions);
+
+        // dispatcher.on('end', () => {
+        //     VoiceChannel.leave();
+        // })
+         dispatcher.on('end', () => {
+            message.reply("A zenének vége!")
+        })
+    })
+    .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
+
+} else {
+    VoiceChannel.leave();  
+    VoiceChannel.join()
+    .then(connection => {
+        console.log("A bot csatlakozott a szobához.");
+        const stream = ytdl(url, { filter : 'audioonly' });
+        const dispatcher = connection.playStream(stream, streamOptions);
+
+        // dispatcher.on('end', () => {
+        //     VoiceChannel.leave();
+        // })
+        dispatcher.on('end', () => {
+            message.reply("A zenének vége!")
+        })
+        
+    })
+    .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
+
+}
+
+    }
+//////////////////////////////////volumeee
+/////////////////////////////////////////////////////
+if(cmd === `${prefix}volume`){
+if (!args[0]) return message.channel.send(`Jelenlegi hangerő: **${volume}/100**`)
+if (isNaN(args[0])) return (`Kérlek írj egy számot **1** és **100** között!`, `${prefix}volume <hangerő>`)
+if (args[0] < 0 || args[0] > 100) return message.channel.send(`kérlek 1 és 100 között írj be egy számot!`, `${prefix}volume <hangerő>`)
+
+dispatcher.setVolume(args[0]);
+
+message.channel.send(`Hangerő beállítva a következőre: **${volume}/100**`);
+
+}
+/////////////////////////////////////////////////////////
+if(cmd === `${prefix}stop`){
+    dispatcher.pause();
+    message.reply("Sikeresen megállítva!");
+}
+if(cmd === `${prefix}resume`){
+    dispatcher.resume();
+    message.reply("Sikeresen folytatva!");
+}
+
+   ///////////////////vége
 })
  
 
