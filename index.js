@@ -1542,13 +1542,14 @@ message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 
 if (cmd === `${prefix}emote`) {
     const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
-    message.channel.send(emojiList);
+    message.channel.send(emojiList).catch(error => message.channel.send(`Hiba! Nem tudom megjeleníteni az emojikat! Lehetséges hibák: nincs jogom, hogy ide küldjek emojikat vagy 2000karakternél nagyobb az üzenet mérete.`));
   }
 
   if (cmd === `${prefix}emoteid`) {
     const emojiList = message.guild.emojis.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
-    message.channel.send(emojiList);
- }
+    message.channel.send(emojiList).catch(error => message.channel.send(`Hiba! Nem tudom megjeleníteni az emojikat! Lehetséges hibák: nincs jogom, hogy ide küldjek emojikat vagy 2000karakternél nagyobb az üzenet mérete.`));
+    
+ } 
 /////////////////////////////////bruh
 
 //   EZ ITT EGY PACEK CUCC ÍRSZ CAHANNEL ===> másik szeró channelén ugyan ez megjelenik :D pacek
