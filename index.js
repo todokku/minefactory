@@ -48,6 +48,13 @@ let prefix = botconfig.prefix;
 
 
 }); //itt vége a bot.on nak
+
+///////////////bizonyos channelbe való írás
+// let y = process.openStdin()
+// y.addListener("data", res => {
+//     let x = res.toString().trim().split(/ +/g)
+//     bot.channels.get("678179487669682217").send(x.join(""));
+// })
  
  
  
@@ -331,6 +338,8 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}emote`, "Lekéri a szerverenévő összes emoteot.")
+    .addField(`${prefix}emoteid`, "Lekéri az összes emoteot ID-vel együtt!")
     .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
     .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
     .addField(`${prefix}matek <easy / normal / hard>`, "Matematikai rejtvény a profiknak!")
@@ -1410,6 +1419,7 @@ if(cmd === `${prefix}i`) {
     }
     ///////////////////////////loading
     ///////////////////////////////////////
+    bot.queue = new Map()
     /////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
     if(cmd === `${prefix}play`){
@@ -1440,11 +1450,12 @@ if(cmd === `${prefix}i`) {
          dispatcher.on('end', () => {
             message.reply("A zenének vége!")
         })
+
     })
     .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
 
 } else {
-    VoiceChannel.leave();  
+    VoiceChannel.leave();
     VoiceChannel.join()
     .then(connection => {
         console.log("A bot csatlakozott a szobához.");
@@ -1467,18 +1478,19 @@ if(cmd === `${prefix}i`) {
 //////////////////////////////////volumeee
 /////////////////////////////////////////////////////
 if(cmd === `${prefix}volume`){
+let queue = bot.queue.get(message.guild.id);
+if (!queue) return message.reply('⚠ Nincs zene aminek állíthatnám a hangerejét')
 if (!args[0]) return message.channel.send(`Jelenlegi hangerő: **${volume}/100**`)
 if (isNaN(args[0])) return (`Kérlek írj egy számot **1** és **100** között!`, `${prefix}volume <hangerő>`)
 if (args[0] < 0 || args[0] > 100) return message.channel.send(`kérlek 1 és 100 között írj be egy számot!`, `${prefix}volume <hangerő>`)
 
-dispatcher.setVolume(args[0]);
-
-message.channel.send(`Hangerő beállítva a következőre: **${volume}/100**`);
+queue.volume = args[0];
+queue.connection.dispatcher.setVolumeLogarithmic(args[0] / 100);
 
 }
 /////////////////////////////////////////////////////////
 if(cmd === `${prefix}stop`){
-    dispatcher.pause();
+    queue.dispatcher.destroy();
     message.reply("Sikeresen megállítva!");
 }
 if(cmd === `${prefix}resume`){
@@ -1487,6 +1499,70 @@ if(cmd === `${prefix}resume`){
 }
 
    ///////////////////vége
+   if(cmd === `${prefix}xd`){
+    let botThumb = bot.user.displayAvatarURL;
+    let niga = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("A parancsok lekéréséért reagálj!", "ˇˇˇ")
+    .addBlankField()
+    .addField(`⚽️`, "Általános parancsok.")
+    .addField(`📝`, "Moderációs parancsok.")
+    .addField(`🎧`, "Zene parancsok.")
+    .addField(`❌`, "Kilépés a menüből.")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+ 
+
+    
+
+const filter = (reaction, user) => {
+	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+};
+message.channel.send(niga)
+message.react('👍').then(() => message.react('👎'));
+message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+	.then(collected => {
+		const reaction = collected.first();
+
+		if (reaction.emoji.name === '👍') {
+			message.reply('you reacted with a thumbs up.');
+		} else {
+            message.reply('you reacted with a thumbs down.');
+        }
+	})
+	.catch(collected => {
+		message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+    });
+}
+
+if (cmd === `${prefix}emote`) {
+    const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+    message.channel.send(emojiList);
+  }
+
+  if (cmd === `${prefix}emoteid`) {
+    const emojiList = message.guild.emojis.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+    message.channel.send(emojiList);
+ }
+/////////////////////////////////bruh
+
+//   EZ ITT EGY PACEK CUCC ÍRSZ CAHANNEL ===> másik szeró channelén ugyan ez megjelenik :D pacek
+////////////////////////////////////////
+// const generalChannel = bot.channels.get("647140389161009152");
+// let szerver = message.guild.name;
+// let üzi = message.toString().trim().split(1)
+//   if (generalChannel.id === message.channel.id) {
+//         bot.channels.get("678563245120028687").send(`<${szerver}>(${message.author.username})=> ${üzi}`);
+//   }
+
+
+
+   ///////////////////////////////
 })
  
 
