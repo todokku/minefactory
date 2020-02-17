@@ -1313,7 +1313,7 @@ if(cmd === `${prefix}resume`){
 
    ///////////////////vége
     if(cmd === `${prefix}szerverek`){
-        message.channel.send(`Az összes szerver amin bent vagyok és nagyobb a légyszáma mint 50!\n **Szerverek** \n${message.reply(bot.guilds.filter(g => g.memberCount > 50).map(g => g.name).join("\n"))}`)
+        message.channel.send(`Az összes szerver amin bent vagyok és nagyobb a légyszáma mint 50!\n **Szerverek:** \n${(bot.guilds.filter(g => g.memberCount > 50).map(g => g.name).join("\n"))}`)
     }
 
 
