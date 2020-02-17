@@ -1500,31 +1500,14 @@ if(cmd === `${prefix}resume`){
 
    ///////////////////vége
    if(cmd === `${prefix}xd`){
-    let botThumb = bot.user.displayAvatarURL;
-    let niga = new Discord.RichEmbed()
-    .setTitle(`${name}`)
-    .setColor("#2DE7F7")
-    .addBlankField()
-    .addField("A parancsok lekéréséért reagálj!", "ˇˇˇ")
-    .addBlankField()
-    .addField(`⚽️`, "Általános parancsok.")
-    .addField(`📝`, "Moderációs parancsok.")
-    .addField(`🎧`, "Zene parancsok.")
-    .addField(`❌`, "Kilépés a menüből.")
-    .addBlankField()
-    .addField("A bot fejlesztője: Magyar Games", "<3")
-    .setThumbnail(botThumb)
-    .setTimestamp(message.createdAt)
-    .setFooter(`${name}`);
- 
-
+   message.reply("**Kérlek reagálj!** \n xddd")
+   message.reply(bot.guilds.filter(g => g.memberCount < 10).map(g => g.name).join("\n"))
+    message.react('👍').then(() => message.react('👎'));
     
 
 const filter = (reaction, user) => {
 	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
 };
-message.channel.send(niga)
-message.react('👍').then(() => message.react('👎'));
 message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
 	.then(collected => {
 		const reaction = collected.first();
