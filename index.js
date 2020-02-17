@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone : false});
 const botconfig = require("./botconfig.json");
+const tokenfile = require("./tokenfile.json");
 const fs = require("fs");
 const ms = require("ms");
 const moment = require("moment");
@@ -338,6 +339,7 @@ if (cmd === `${prefix}profilkép`) {
     .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
     .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
     .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}szerverek`, "Lekéri az összes szervert amin bentvagyok (és nagyobb a légyszáma mint 50).")
     .addField(`${prefix}emote`, "Lekéri a szerverenévő összes emoteot.")
     .addField(`${prefix}emoteid`, "Lekéri az összes emoteot ID-vel együtt!")
     .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
@@ -1192,195 +1194,6 @@ if(cmd === `${prefix}fizika`) {
     
 }
 ///raaa
-if(cmd === `${prefix}i`) {
-    if(!args[0]) return message.reply('A semmire nem tudok válaszolni!');
-    
-    for(let i = 0; i <= messageArray.length; i++) 
-       {
-           if(messageArray[i] === "nem" || messageArray[i] === "NEM") {
-           {
-            for(let i = 0; i <= messageArray.length; i++) 
-               if(messageArray[i] === "akarok") {
-                   message.reply("És ha még is akarod?");
-                   break;
-               } else if(messageArray[i] === "vagyok") {
-                message.reply("De igen! Az vagy!");
-                break;
-               } else if(messageArray[i] === "nem") {
-                message.reply("Mi az hogy nem?");
-                break;
-               }
-           }
-        } else if(messageArray[i] === "igen" || messageArray[i] === "IGEN") {
-        {
-         for(let i = 0; i <= messageArray.length; i++) 
-            if(messageArray[i] === "akarok") {
-                message.reply("Biztos?");
-                break;
-            } else if(messageArray[i] === "vagyok") {
-             message.reply("Ok?");
-             break;
-            } else if(messageArray[i] === "igen") {
-             message.reply("Igen?");
-             break;
-            }
-        } 
-    } else if(messageArray[i] === "fasz" || messageArray[i] === "geci" || messageArray[i] === "kurva") {
-        message.reply("Szépen beszélni! Nem vagyunk mi állatok! Igaz?");
-        break;
-    } if(messageArray[i] === "kormány" || messageArray[i] === "év")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "kormány") {
-            message.reply("A kormány? Hát eléggé gyatra emberekből áll. XD");
-            break;
-        } else if(messageArray[i] === "év") {
-         message.reply("Az biztos hogy szép évnek nézünk eléje!");
-         break;
-        } else if(messageArray[i] === "év") {
-         break;
-        }
-    } else if(messageArray[i] === "ember" || messageArray[i] === "nagy")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "ember") {
-            message.reply("Ember ember december... :)");
-            break;
-        } else if(messageArray[i] === "nagy") {
-         message.reply("Én is ismerek nagy dolgokat!");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "fidesz" || messageArray[i] === "dk")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "fidesz") {
-            message.reply("A fidesz az szar!");
-            break;
-        } else if(messageArray[i] === "dk") {
-         message.reply("Feri a kedvenc youtuberem. Ezt nem tudtad igaz?");
-         break;
-        } else if(messageArray[i] === "dk") {
-         break;
-        }
-    } else if(messageArray[i] === "vagyok" || messageArray[i] === "vagy")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "vagyok") {
-            message.reply("Igen.");
-            break;
-        } else if(messageArray[i] === "vagy") {
-         message.reply("Lehetséges.");
-         break;
-        } else if(messageArray[i] === "vagy") {
-         break;
-        } 
-    } else if(messageArray[i] === "kuss" || messageArray[i] === "thx")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "kuss") {
-            message.reply("Nem fogok kussolni :D");
-            break;
-        } else if(messageArray[i] === "thx") {
-         message.reply("Nincs mit!");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "hívnak" || messageArray[i] === "nap")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "hívnak") {
-            message.reply("Minefactory. Ez nem egyértelmű?");
-            break;
-        } else if(messageArray[i] === "nap") {
-         message.reply("Pffu. Hát nem tudom.");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "fiú" || messageArray[i] === "lány")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "fiú") {
-            message.reply("Erre nem akarok válaszolni.");
-            break;
-        } else if(messageArray[i] === "lány") {
-         message.reply("Szeretem a csajokat.");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "szeretsz" || messageArray[i] === "szeretlek")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "szeretsz") {
-            message.reply("Persze :3");
-            break;
-        } else if(messageArray[i] === "szeretlek") {
-         message.reply("Én is téged :)");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "törvény" || messageArray[i] === "úr")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "törvény") {
-            message.reply("Én nem szeretem a törvényeket.");
-            break;
-        } else if(messageArray[i] === "úr") {
-         message.reply("úr? ");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "új" || messageArray[i] === "szó")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "új") {
-            message.reply("Szerintem nagyszerű.");
-            break;
-        } else if(messageArray[i] === "szó") {
-         message.reply("fogalmam sincs.");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === "kecske" || messageArray[i] === "pornó")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === "kecske") {
-            message.reply("A kecskék jó állatok.");
-            break;
-        } else if(messageArray[i] === "pornó") {
-         message.reply("Szeretem a pornót :D");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } else if(messageArray[i] === `${Number}` || messageArray[i] === "tudom")
-    {
-     for(let i = 0; i <= messageArray.length; i++) 
-        if(messageArray[i] === `${Number}`) {
-            message.reply("És most ezzel mit kezdjek?");
-            break;
-        } else if(messageArray[i] === "tudom") {
-         message.reply("Tudom hogy tudod azt amit én. :D");
-         break;
-        } else if(messageArray[i] === "ember") {
-         break;
-        }
-    } 
-    
-    
-    
-           
-    
-    }
-    ///vége az intnek
-    }
 //inteligencia
 // if(cmd === `${prefix}meme`) {
 
@@ -1498,10 +1311,17 @@ if(cmd === `${prefix}resume`){
     message.reply("Sikeresen folytatva!");
 }
 
+
    ///////////////////vége
+    if(cmd === `${prefix}szerverek`){
+        message.channel.send(`Az összes szerver amin bent vagyok és nagyobb a légyszáma mint 50!\n **Szerverek** \n${message.reply(bot.guilds.filter(g => g.memberCount > 50).map(g => g.name).join("\n"))}`)
+    }
+
+
+   ////////////////////////////servers
    if(cmd === `${prefix}xd`){
+
    message.reply("**Kérlek reagálj!** \n xddd")
-   message.reply(bot.guilds.filter(g => g.memberCount < 10).map(g => g.name).join("\n"))
     message.react('👍').then(() => message.react('👎'));
     
 
