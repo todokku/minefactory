@@ -13,7 +13,7 @@ let cooldown = new Set();
 let ldw = new Set();
 let sdseconds = 15;
 const weather = require('weather-js');
-// const randomPuppy = require("random-puppy");
+const randomPuppy = require("random-puppy");
 
 const ytdl = require('ytdl-core');
 const {YTSearcher} = require('ytsearcher');
@@ -23,7 +23,7 @@ const streamOptions = { seek: 0.01, volume: 1.001 };
 // bot.youtube = new YouTube(YouTubeAPIKey);
 // const queue = new Map();
 const novelcovid = require("novelcovid");
-////////////////////////////////////////////////
+///////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
  
@@ -1136,20 +1136,20 @@ if(cmd === `${prefix}fizika`) {
 }
 ///raaa
 //inteligencia
-// if(cmd === `${prefix}meme`) {
+if(cmd === `${prefix}meme`) {
 
-// const subReddits = ["dankmeme", "meme", "me_irl"];
-//         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
+const subReddits = ["dankmeme", "meme", "me_irl"];
+        const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
-//         const img = await randomPuppy(random);
-//         const embed = new Discord.RichEmbed()
-//             .setColor("RANDOM")
-//             .setImage(img)
-//             .setTitle(`From /r/${random}`)
-//             .setURL(`https://reddit.com/r/${random}`);
+        const img = await randomPuppy(random);
+        const embed = new Discord.RichEmbed()
+            .setColor("RANDOM")
+            .setImage(img)
+            .setTitle(`From /r/${random}`)
+            .setURL(`https://reddit.com/r/${random}`);
 
-//         message.channel.send(embed);
-// }
+        message.channel.send(embed);
+}
 
 
 
