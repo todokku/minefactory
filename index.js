@@ -22,6 +22,7 @@ const streamOptions = { seek: 0.01, volume: 1.001 };
 // const YouTube = require('simple-youtube-api');
 // bot.youtube = new YouTube(YouTubeAPIKey);
 // const queue = new Map();
+const novelcovid = require("novelcovid");
 ////////////////////////////////////////////////
 
 //Feljebb vannak a globális változók.
@@ -318,66 +319,7 @@ if (cmd === `${prefix}profilkép`) {
 
 
 /////////////////////////////////////////////////////////////
- 
-   if(cmd === `${prefix}help`){
- 
- 
-    let botThumb = bot.user.displayAvatarURL;
-    let testembed = new Discord.RichEmbed()
-    .setTitle(`${name}`)
-    .setColor("#2DE7F7")
-    .addBlankField()
-    .addField("Általános Parancsok:", "ˇˇˇ")
-    .addBlankField()
-    .addField(`${prefix}ötlet <ötleted>`, "Ha bármi ötleted van, hogy mi legyen a botba ide írd!")
-    .addField(`${prefix}szavazás <szavazás>`, "Szavazás indítása.")
-    .addField(`${prefix}üzemidő`, "Üzem idő.")
-    .addField(`${prefix}meghívó`, "Ha tetszik a bot itt tudod meghívni.")
-    .addField(`${prefix}profilkép <@név>`, "Profilkép lekérése.")
-    .addField(`${prefix}cigi`, "Elszívsz egy cigit. (Vigyázz káros!)")
-    .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
-    .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
-    .addField(`${prefix}macska`, "Cuki macskás kép.")
-    .addField(`${prefix}szerverek`, "Lekéri az összes szervert amin bentvagyok (és nagyobb a légyszáma mint 50).")
-    .addField(`${prefix}emote`, "Lekéri a szerverenévő összes emoteot.")
-    .addField(`${prefix}emoteid`, "Lekéri az összes emoteot ID-vel együtt!")
-    .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
-    .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
-    .addField(`${prefix}matek <easy / normal / hard>`, "Matematikai rejtvény a profiknak!")
-    .addBlankField()
-    .addField("A bot fejlesztője: Magyar Games", "<3")
-    .setThumbnail(botThumb)
-    .setTimestamp(message.createdAt)
-    .setFooter(`${name}`);
- 
-    message.member.send(testembed);
 
-    let thxxd = new Discord.RichEmbed()
-    .setTitle(`${name}`)
-    .setColor("#2DE7F7")
-    .addBlankField()
-    .addField("Moderátor parancsok:", "ˇˇˇ")
-    .addBlankField()
-    .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
-    .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
-    .addField(`${prefix}ranglétrehoz <új rang>`, "Létrehoz egy új rangot. **Moderator**")
-    .addField(`${prefix}duma`, "Szöveg iratás bottal. **Moderator**")
-    .addField(`${prefix}kick <@név>`, "Ember kickelése. **Moderator**")
-    .addField(`${prefix}warn <@név>`, "Ember warnolása. **Moderator**")
-    .addField(`${prefix}ban <@név>`, "Ember bannolása. **Moderator**")
-    .addField(`${prefix}törlés <2-100>`, "Üzenetek törlése. **Moderator**")
-    .addField(`${prefix}nyeremény <tárgy> <5m, 10m, 30m, 1h>`, "Nyeremény játék létrehozása. **Moderator**")
-    .addField(`${prefix}időnémítás <@név> <3m, 5m, 15m, 30m, 1h>`, "Ember némítása egy meghatározott időre! **Moderator**")
-    .addBlankField()
-    .addField("A bot fejlesztője: Magyar Games", "<3")
-    .setThumbnail(botThumb)
-    .setTimestamp(message.createdAt)
-    .setFooter(`${name}`);
-    message.member.send(thxxd);
-
-    message.reply(`privátba elküldtem a parancsokat!`);
-    
-}
 
 if(cmd === `${prefix}meghívó`) {
     let mgEmbed = new Discord.RichEmbed()
@@ -1313,32 +1255,127 @@ if(cmd === `${prefix}resume`){
 
    ///////////////////vége
     if(cmd === `${prefix}szerverek`){
-        message.channel.send(`Az összes szerver amin bent vagyok és nagyobb a légyszáma mint 50!\n **Szerverek:** \n${(bot.guilds.filter(g => g.memberCount > 50).map(g => g.name).join("\n"))}`)
+        let szerverxd = bot.guilds.size;
+        message.channel.send(`Az összes szerver amin bent vagyok és nagyobb a légyszáma mint 50!\n **Szerverek:** \n${(bot.guilds.filter(g => g.memberCount > 0).map(g => g.name).join("\n"))}`)
+        message.guild.channels.get(message.channel.id).createInvite().then(invite =>
+            message.channel.send(invite.url)
+        );
+        
     }
 
 
    ////////////////////////////servers
-   if(cmd === `${prefix}xd`){
+   if(cmd === `${prefix}help`){
 
-   message.reply("**Kérlek reagálj!** \n xddd")
-    message.react('👍').then(() => message.react('👎'));
+   message.reply("**Kérlek reagálj!** \n Fun = 😁 \n Általános = 🏈 \n Zene = 📢 \n Moderáció = 💻 \n Menü bezárása = ❌").then(r => r.delete(120000));
+    message.react('😁').then(() => message.react('🏈')).then(() => message.react('📢')).then(() => message.react('💻')).then(() => message.react('❌'));
     
 
 const filter = (reaction, user) => {
-	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+	return ['😁', '🏈', '📢', '💻', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
 };
-message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+message.awaitReactions(filter, { max: 1, time: 120000, errors: ['time'] })
 	.then(collected => {
 		const reaction = collected.first();
 
-		if (reaction.emoji.name === '👍') {
-			message.reply('you reacted with a thumbs up.');
-		} else {
-            message.reply('you reacted with a thumbs down.');
+		if (reaction.emoji.name === '😁') {
+            message.reply('**Megnyitva: Fun menü**');
+            let botThumb = bot.user.displayAvatarURL;
+    let testembed = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("Fun parancsok:", "ˇˇˇ")
+    .addBlankField()
+    .addField(`${prefix}profilkép <@név>`, "Profilkép lekérése.")
+    .addField(`${prefix}cigi`, "Elszívsz egy cigit. (Vigyázz káros!)")
+    .addField(`${prefix}macska`, "Cuki macskás kép.")
+    .addField(`${prefix}időjárás <falu / város neve>`, "Lekéri a falu/város nak az időjárás adatait.")
+    .addField(`${prefix}nitrókód`, "Generál egy random discord nitró kódot. (0.001% az esély hogy a kód működő kód!)")
+    .addField(`${prefix}matek <easy / normal / hard>`, "Matematikai rejtvény a profiknak!")
+    .addField(`${prefix}corona`, "Lekéri a koronavírus statisztikáit.")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+ 
+    message.channel.send(testembed);
+		} else if (reaction.emoji.name === '🏈'){
+            message.reply('**Megnyitva: Általános menü**');
+            let botThumb = bot.user.displayAvatarURL;
+    let testembed = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("Általános parancsok:", "ˇˇˇ")
+    .addBlankField()
+    .addField(`${prefix}ötlet <ötleted>`, "Ha bármi ötleted van, hogy mi legyen a botba ide írd!")
+    .addField(`${prefix}szavazás <szavazás>`, "Szavazás indítása.")
+    .addField(`${prefix}üzemidő`, "Üzem idő.")
+    .addField(`${prefix}meghívó`, "Ha tetszik a bot itt tudod meghívni.")
+    .addField(`${prefix}userinfo <@név>`, "Lekéri az összes információt a felhasználóról.")
+    .addField(`${prefix}serverinfo`, "Lekéri az összes információt a szerverről.")
+    .addField(`${prefix}szerverek`, "Lekéri az összes szervert amin bentvagyok (és nagyobb a légyszáma mint 50).")
+    .addField(`${prefix}emote`, "Lekéri a szerverenévő összes emoteot.")
+    .addField(`${prefix}emoteid`, "Lekéri az összes emoteot ID-vel együtt!")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+ 
+    message.channel.send(testembed);
+        } else if (reaction.emoji.name === '📢'){
+            message.reply("**Megnyitva: Zene menü**");
+            let botThumb = bot.user.displayAvatarURL;
+    let testembed = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("Zene parancsok:", "ˇˇˇ")
+    .addBlankField()
+    .addField(`${prefix}play (url link)`, "Zene lejátszása (url).")
+    .addField(`${prefix}kilép`, "Kilép az adott szobából.")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+ 
+    message.channel.send(testembed);
+        } else if (reaction.emoji.name === '💻'){
+            message.reply("**Megnyitva: Moderációs menü**");
+            let botThumb = bot.user.displayAvatarURL;
+    let thxxd = new Discord.RichEmbed()
+    .setTitle(`${name}`)
+    .setColor("#2DE7F7")
+    .addBlankField()
+    .addField("Moderátor parancsok:", "ˇˇˇ")
+    .addBlankField()
+    .addField(`${prefix}némítás <@név>`, "némítás. **Moderator**")
+    .addField(`${prefix}felnémítás <@név>`, "némítás oldása. **Moderator**")
+    .addField(`${prefix}ranglétrehoz <új rang>`, "Létrehoz egy új rangot. **Moderator**")
+    .addField(`${prefix}duma`, "Szöveg iratás bottal. **Moderator**")
+    .addField(`${prefix}kick <@név>`, "Ember kickelése. **Moderator**")
+    .addField(`${prefix}warn <@név>`, "Ember warnolása. **Moderator**")
+    .addField(`${prefix}ban <@név>`, "Ember bannolása. **Moderator**")
+    .addField(`${prefix}törlés <2-100>`, "Üzenetek törlése. **Moderator**")
+    .addField(`${prefix}nyeremény <tárgy> <5m, 10m, 30m, 1h>`, "Nyeremény játék létrehozása. **Moderator**")
+    .addField(`${prefix}időnémítás <@név> <3m, 5m, 15m, 30m, 1h>`, "Ember némítása egy meghatározott időre! **Moderator**")
+    .addBlankField()
+    .addField("A bot fejlesztője: Magyar Games", "<3")
+    .setThumbnail(botThumb)
+    .setTimestamp(message.createdAt)
+    .setFooter(`${name}`);
+    message.channel.send(thxxd);
+        } else {
+            message.channel.send(`${emoji.done}**Menü bezárva.** \n -*A menü sikeresen bezárva!* \n-*A menú üzenet törlődik 2percen belül!*`)
         }
 	})
 	.catch(collected => {
-		message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+        message.edit("A menü sikeresen bezárva!")
+		message.reply('Mivel 2percen belül nem reagáltál ezért a menü bazárt!');
     });
 }
 
@@ -1363,6 +1400,27 @@ if (cmd === `${prefix}emote`) {
 //         bot.channels.get("678563245120028687").send(`<${szerver}>(${message.author.username})=> ${üzi}`);
 //   }
 
+
+/////////////////////////////////////////////////////////////////////////////
+
+if(cmd === `${prefix}corona`){
+    const stats = await novelcovid.all();
+    const countryStats = await novelcovid.countries();
+    var todayDeaths = 0;
+    var todayCases = 0;
+    countryStats.forEach(country => { todayDeaths += country.todayDeaths; todayCases += country.todayCases });
+    const embed = new Discord.RichEmbed()
+        .setAuthor("Korona vírus statisztika", message.member.username)
+        .addField("Megerősített esetek", `${stats.cases.toLocaleString()} eset`, true)
+        .addField("Halálok", `${stats.deaths.toLocaleString()} halál`, true)
+        .addField("Halál %", `${((stats.deaths / stats.cases) * 100).toFixed(2)}%`, true)
+        .addField("Fertőzési %", `${((stats.recovered / stats.cases) * 100).toFixed(2)}%`, true)
+        .addField("Mai esetek", `${todayCases.toLocaleString()} eset`, true)
+        .addField("Mai halálok", `${todayDeaths.toLocaleString()} halál`, true)
+        .setThumbnail("https://cdn.discordapp.com/attachments/685198558969856027/688073259870060552/iu.png")
+        .setTimestamp();
+    message.channel.send(embed);
+}
 
 
    ///////////////////////////////
