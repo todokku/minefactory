@@ -761,15 +761,6 @@ if(!pluszplszpluszaaa) {
     });
 };
 
-let warnolt = message.guild.roles.find(`name`, `warn4`);
-if(message.member.roles.has(warnolt.id)) {
-    if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
-    if(!message.member.hasPermission("KICK_MEMBERS")) {
-    message.channel.send(`${emoji.w} <@${warnolt.id}> Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
-    message.member.kick();
-    }
-}
-}
 
 if (cmd === `${prefix}warn`) {
     if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
@@ -1422,6 +1413,18 @@ if(cmd === `${prefix}corona`){
         .setTimestamp();
     message.channel.send(embed);
 }
+
+////////////////////////////////////vége
+let warnolt = message.guild.roles.find(`name`, `warn4`);
+if(message.member.roles.has(warnolt.id)) {
+    if(message.guild.member(bot.user).hasPermission("ADMINISTRATOR")) {
+    if(!message.member.hasPermission("KICK_MEMBERS")) {
+    message.channel.send(`${emoji.w} <@${warnolt.id}> Túl sok warnod volt ezért a rendszer autómatikusan kickelt!`);
+    message.member.kick();
+    }
+}
+}
+////////////////////////////vége
 
 
    ///////////////////////////////
