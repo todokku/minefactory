@@ -32,7 +32,6 @@ const config = require('./settiings/config.json');
 const {YouTubeAPIKey} = require('./settiings/credentials.json');
 const utils = require('./global/utils');
 
-require('dotenv/config');
 
 
 require('./global/functions')(bot, utils, ytdl, config);
