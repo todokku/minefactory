@@ -56,7 +56,7 @@ module.exports = (bot, utils, ytdl, config) => {
         if (!queue) {
             let queueConstruct = {
                 textChannel: message.channel,
-                VoiceChannel: vc,
+                voiceChannel: vc,
                 connection: null,
                 musics: [],
                 volume: 50,
@@ -91,6 +91,7 @@ module.exports = (bot, utils, ytdl, config) => {
         let queue = bot.queue.get(guild.id);
         let votes = bot.votes.get(guild.id)
         if (!music) {
+            queue.voiceChannel.leave();
             bot.queue.delete(guild.id);
             bot.votes.delete(guild.id);
             return queue.textChannel.send(`A zene végetért`);
