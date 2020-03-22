@@ -25,6 +25,32 @@ const streamOptions = { seek: 0.01, volume: 1.001 };
 const novelcovid = require("novelcovid");
 ///////////////////////////////////////////////
 
+const YouTube = require('simple-youtube-api');
+const ready = require('./handlers/ready');
+const message = require('./handlers/message');
+const config = require('./settiings/config.json');
+const {YouTubeAPIKey} = require('./settiings/credentials.json');
+const utils = require('./global/utils');
+
+require('dotenv/config');
+
+
+require('./global/functions')(bot, utils, ytdl, config);
+
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+bot.youtube = new YouTube(YouTubeAPIKey); // YouTube Client
+bot.queue = new Map() // Music Queue
+bot.votes = new Map(); // Vote Skip
+ready.ready(bot);
+message.message(bot, utils, config, Discord);
+
+
+
+
+
+///////////////////////////////////tesztecdke
+
 //Feljebb vannak a globális változók.
  
  
@@ -1142,6 +1168,36 @@ const subReddits = ["dankmeme", "meme", "me_irl"];
         message.channel.send(embed);
 }
 
+if(cmd === `${prefix}rule34`) {
+
+    const subReddits = ["dankmeme", "meme", "me_irl"];
+            const random = subReddits[Math.floor(Math.random() * subReddits.length)];
+    
+            const img = await randomPuppy(random);
+            const embed = new Discord.RichEmbed()
+                .setColor("RANDOM")
+                .setImage(img)
+                .setTitle(`From /r/${random}`)
+                .setURL(`https://reddit.com/r/${random}`);
+    
+            message.channel.send(embed);
+    }
+
+    if(cmd === `${prefix}bsporn`) {
+
+        const subReddits = ["dankmeme", "meme", "me_irl"];
+                const random = subReddits[Math.floor(Math.random() * subReddits.length)];
+        
+                const img = await randomPuppy(random);
+                const embed = new Discord.RichEmbed()
+                    .setColor("RANDOM")
+                    .setImage(img)
+                    .setTitle(`From /r/${random}`)
+                    .setURL(`https://reddit.com/r/${random}`);
+        
+                message.channel.send(embed);
+        }
+
 
 
 ///vége
@@ -1153,95 +1209,74 @@ const subReddits = ["dankmeme", "meme", "me_irl"];
 
 ////zene
 
-    if(message.content.toLowerCase().startsWith("!kilép"))
-    {
-    let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
-    if(VoiceChannel != null)
-    {            
-        VoiceChannel.leave();    
-        message.reply("kitett a duma szobábol!");
-    }
-    }
+    // if(message.content.toLowerCase().startsWith("!kilép"))
+    // {
+    // let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
+    // if(VoiceChannel != null)
+    // {            
+    //     VoiceChannel.leave();    
+    //     message.reply("kitett a duma szobábol!");
+    // }
+    // }
     ///////////////////////////loading
     ///////////////////////////////////////
-    bot.queue = new Map()
     /////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
-    if(cmd === `${prefix}play`){
+//     if(cmd === `${prefix}play`){
         
-    let VC = message.member.voiceChannel;
-    if (!VC) return message.reply("Kérlek lépj be egy voice channel be!")
+//     let VC = message.member.voiceChannel;
+//     if (!VC) return message.reply("Kérlek lépj be egy voice channel be!")
 
-    let url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : '';
-    let pl = /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
+//     let url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : '';
+//     let pl = /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
 
-    // let searchString = args.join(' ');
-    if (!url || !pl) return message.reply(`kérlek írj zene címet vagy url linket!`)
+//     // let searchString = args.join(' ');
+//     if (!url || !pl) return message.reply(`kérlek írj zene címet vagy url linket!`)
 
-    let perms = VC.permissionsFor(message.client.user);
-    if (!perms.has('CONNECT')) return message.reply(`Nem tudok csatlakozni a hang csatornába mert nincs jogom hogy csatlakozzak ehhez a hang csatornához!`)
-    if (!perms.has('SPEAK')) return message.reply(`Nem tudok zenét indítani mert nincs jogom hogy beszéljek!`)
-    let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
-    if(message.guild.channels.find(channel => channel.id === message.guild.member(bot.user).voiceChannelID)){
-    VoiceChannel.join()
-    .then(connection => {
-        console.log("A bot csatlakozott a szobához.");
-        const stream = ytdl(url, { filter : 'audioonly' });
-        const dispatcher = connection.playStream(stream, streamOptions);
+//     let perms = VC.permissionsFor(message.client.user);
+//     if (!perms.has('CONNECT')) return message.reply(`Nem tudok csatlakozni a hang csatornába mert nincs jogom hogy csatlakozzak ehhez a hang csatornához!`)
+//     if (!perms.has('SPEAK')) return message.reply(`Nem tudok zenét indítani mert nincs jogom hogy beszéljek!`)
+//     let VoiceChannel = message.guild.channels.find(channel => channel.id === message.member.voiceChannelID);
+//     if(message.guild.channels.find(channel => channel.id === message.guild.member(bot.user).voiceChannelID)){
+//     VoiceChannel.join()
+//     .then(connection => {
+//         console.log("A bot csatlakozott a szobához.");
+//         const stream = ytdl(url, { filter : 'audioonly' });
+//         const dispatcher = connection.playStream(stream, streamOptions);
 
-        // dispatcher.on('end', () => {
-        //     VoiceChannel.leave();
-        // })
-         dispatcher.on('end', () => {
-            message.reply("A zenének vége!")
-        })
+//         // dispatcher.on('end', () => {
+//         //     VoiceChannel.leave();
+//         // })
+//          dispatcher.on('end', () => {
+//             message.reply("A zenének vége!")
+//         })
 
-    })
-    .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
+//     })
+//     .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
 
-} else {
-    VoiceChannel.leave();
-    VoiceChannel.join()
-    .then(connection => {
-        console.log("A bot csatlakozott a szobához.");
-        const stream = ytdl(url, { filter : 'audioonly' });
-        const dispatcher = connection.playStream(stream, streamOptions);
+// } else {
+//     VoiceChannel.leave();
+//     VoiceChannel.join()
+//     .then(connection => {
+//         console.log("A bot csatlakozott a szobához.");
+//         const stream = ytdl(url, { filter : 'audioonly' });
+//         const dispatcher = connection.playStream(stream, streamOptions);
 
-        // dispatcher.on('end', () => {
-        //     VoiceChannel.leave();
-        // })
-        dispatcher.on('end', () => {
-            message.reply("A zenének vége!")
-        })
+//         // dispatcher.on('end', () => {
+//         //     VoiceChannel.leave();
+//         // })
+//         dispatcher.on('end', () => {
+//             message.reply("A zenének vége!")
+//         })
         
-    })
-    .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
+//     })
+//     .catch(error => message.channel.send(`Hiba! A zene nem található! Adj meg egy urlt!`));
 
-}
+// }
 
-    }
-//////////////////////////////////volumeee
+//     }
+// //////////////////////////////////volumeee
 /////////////////////////////////////////////////////
-if(cmd === `${prefix}volume`){
-let queue = bot.queue.get(message.guild.id);
-if (!queue) return message.reply('⚠ Nincs zene aminek állíthatnám a hangerejét')
-if (!args[0]) return message.channel.send(`Jelenlegi hangerő: **${volume}/100**`)
-if (isNaN(args[0])) return (`Kérlek írj egy számot **1** és **100** között!`, `${prefix}volume <hangerő>`)
-if (args[0] < 0 || args[0] > 100) return message.channel.send(`kérlek 1 és 100 között írj be egy számot!`, `${prefix}volume <hangerő>`)
-
-queue.volume = args[0];
-queue.connection.dispatcher.setVolumeLogarithmic(args[0] / 100);
-
-}
-/////////////////////////////////////////////////////////
-if(cmd === `${prefix}stop`){
-    queue.dispatcher.destroy();
-    message.reply("Sikeresen megállítva!");
-}
-if(cmd === `${prefix}resume`){
-    dispatcher.resume();
-    message.reply("Sikeresen folytatva!");
-}
 
 
    ///////////////////vége
@@ -1429,6 +1464,5 @@ if(message.member.roles.has(warnolt.id)) {
 
    ///////////////////////////////
 })
- 
 
 bot.login(process.env.BOT_TOKEN);
